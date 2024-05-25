@@ -15542,4 +15542,74 @@ dl {
     object-fit: contain;    
   }
 
+  .alert {
+    margin-top: 10px;
+    padding: 20px 40px;
+    min-width: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10000000; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.alert.showAlert {
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.alert.hide {
+    opacity: 0; 
+    pointer-events: none; 
+}
+
+
+.alert.show {
+  animation: show_slide 1s ease forwards;
+}
+
+@keyframes show_slide {
+  0% {
+    transform: translateX(100%);
+  }
+
+  40% {
+    transform: translateX(-10%);
+  }
+
+  80% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.alert.hide {
+  animation: hide_slide 1s ease forwards;
+}
+
+@keyframes hide_slide {
+  0% {
+    transform: translateX(-10px);
+  }
+
+  40% {
+    transform: translateX(0%);
+  }
+
+  80% {
+    transform: translateX(-10%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -5,6 +5,19 @@ const getBanner = async () => {
     return await connection.queryDatabase(query,[])
 };
 
+const insertBanner = async (img) => {
+    const query = 'INSERT INTO banner (img) VALUES (?)'; 
+    return await connection.queryDatabase(query, [img]);
+};
+
+const deleteBanner = async (banner_id) =>{
+    const query = 'DELETE FROM banner WHERE banner_id = ?';
+    return await connection.queryDatabase(query, [banner_id]);
+}
+
+
 module.exports = {
-    getBanner
+    getBanner,
+    insertBanner,
+    deleteBanner
 };
