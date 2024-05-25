@@ -15535,9 +15535,11 @@ dl {
   .track .step.active .text{
     font-weight: 400;
     color: #000
-  }.track .text{
-    display: block;
-    margin-top: 7px
+  }
+  .img-table{
+    width: 70% !important; 
+    height: 100% !important; 
+    object-fit: contain;    
   }
 
 /*# sourceMappingURL=style.css.map */

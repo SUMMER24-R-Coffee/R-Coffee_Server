@@ -52,18 +52,19 @@ CREATE TABLE IF NOT EXISTS Voucher (
 );
 
 CREATE TABLE IF NOT EXISTS `Order` (
-    order_id INT PRIMARY KEY AUTO_INCREMENT,
-    order_date DATETIME NOT NULL,
+    order_id VARCHAR(255) PRIMARY KEY,
+    order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     update_at DATETIME,
     payment_method VARCHAR(50),
     total_amount DOUBLE NOT NULL,
     discount_amount DOUBLE,
-    status_order ENUM('pending', 'delivering', 'cancel', 'delivered') NOT NULL DEFAULT 'pending',
+    status_order ENUM('pending', 'preparing', 'pick up' ,'delivering', 'cancelled', 'delivered') NOT NULL DEFAULT 'pending',
     address_id INT,
     voucher_id INT,
     basket_id INT,
     email_user VARCHAR(255),
+    order_message VARCHAR,
     FOREIGN KEY (address_id) REFERENCES Address(address_id),
     FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id),
     FOREIGN KEY (basket_id) REFERENCES Basket(basket_id),
@@ -97,17 +98,18 @@ CREATE TABLE IF NOT EXISTS Notification (
     create_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     is_read BOOLEAN DEFAULT FALSE,
     email_user VARCHAR(255),
-    order_id INT,
+    order_id VARCHAR(255),
     FOREIGN KEY (email_user) REFERENCES Users(email_user),
     FOREIGN KEY (order_id) REFERENCES `Order`(order_id)
 );
 
 CREATE TABLE IF NOT EXISTS Employee (
-    emp_id INT PRIMARY KEY AUTO_INCREMENT,
-    password VARCHAR(255) NOT NULL,
+    emp_id VARCHAR(255) PRIMARY KEY NOT NULL,
+    emp_password VARCHAR(255) NOT NULL,
     emp_name VARCHAR(255) NOT NULL,
     emp_gender VARCHAR(10),
     emp_img VARCHAR(255),
-    emp_role ENUM('manager', 'employee') NOT NULL,
-    emp_phone VARCHAR(15)
+    emp_role ENUM('manager', 'employee') NOT NULL DEFAULT 'employee',
+    emp_phone VARCHAR(15),
+    is_wrorking BOOLEAN DEFAULT TRUE
 );

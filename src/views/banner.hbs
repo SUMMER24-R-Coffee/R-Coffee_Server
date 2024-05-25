@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>R'Coffee</title>
+    <title>Banner</title>
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
@@ -92,7 +92,7 @@
                         <li class="nav-item nav-profile dropdown border-0">
                             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
                                 <img class="nav-profile-img mr-2" alt="" src="{{user.avatar}}" />
-                                <span class="profile-name">Henry Klein</span>
+                                <span class="profile-name">{{user.name}}</span>
                             </a>
                             <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                                 <a class="dropdown-item" href="#">
@@ -129,19 +129,21 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
+                                            <th class="p-2 text-center">Image</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each banners}}
                                         <tr>
-                                            <td>1</td>
-                                            <td class="p-2 text-center w-100"><img class="preview-images" src="/assets/images/img_default.png" alt=""></td>
+                                            <td>{{sum 1 @index }}</td>
+                                            <td class="p-2 text-center w-100"><img class="img-table" src="{{img}}" alt=""></td>
                                             <td>
                                                 <button class="btn btn-primary btn-icon-text mx-auto">Edit<i class="mdi mdi-file-check btn-icon-append"></i></button>
                                                 <button class="btn btn-danger btn-icon-text mx-auto">Delete<i class="mdi mdi-file-check btn-icon-prepend"></i></button>
                                             </td>
                                         </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
