@@ -129,24 +129,35 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
+                                            <th class="text-center">Image</th>
                                             <th>Name</th>
                                             <th>Category</th>
                                             <th>Price</th>
                                             <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each products}}
                                         <tr>
-                                            <td>1</td>
-                                            <td>53275531</td>
-                                            <td>53275531</td>
-                                            <td>53275531</td>
-                                            <td>12 May 2017</td>
+                                            <td>{{sum 1 @index}}</td>
+                                            <td class="text-center"><img style="object-fit: cover;" class="img-fluid rounded w-50 h-50" src="{{img}}" alt=""></td>
+                                            <td>{{name}}</td>
+                                            <td>{{category}}</td>
+                                            <td>{{price}} đ</td>
                                             <td>
-                                                <label class="badge badge-danger">Pending</label>
+                                                {{#if (eq is_available "available")}}
+                                                    <label class="badge badge-success">{{is_available}}</label>
+                                                {{else}}
+                                                    <label class="badge badge-danger">{{is_available}}</label>
+                                                {{/if}}
                                             </td>
+                                            <td>
+                                                <a href="/product/{{product_id}}" class="btn btn-primary btn-icon-text mx-auto">Edit<i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                                <button  class="btn btn-danger btn-icon-text mx-auto"data-toggle="modal" data-target="#delete-active" data-id="{{this.product_id}}">Delete<i class="mdi mdi-file-check btn-icon-prepend"></i></button>
+                                            </td>                                            
                                         </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -166,6 +177,13 @@
                 <!-- main-panel ends -->
             </div>
             <!-- page-body-wrapper ends -->
+        </div>
+            {{> notification}}            
+        <div>
+        <div>
+            {{> delete}}
+        </div>            
+
         </div>
         <!-- container-scroller -->
         <!-- plugins:js -->
@@ -188,6 +206,8 @@
         <!-- endinject -->
         <!-- Custom js for this page -->
         <script src="assets/js/dashboard.js"></script>
+        <script src="assets/js/notification.js"></script>
+        <script src="assets/js/delete-product.js"></script>
         <!-- End custom js for this page -->
 </body>
 

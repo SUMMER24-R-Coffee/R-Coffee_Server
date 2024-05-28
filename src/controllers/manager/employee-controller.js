@@ -2,7 +2,19 @@ const EmployeeModel=require('../../models/manager/employee-model')
 
 class employeeController{
     async employee(req,res){
-        res.render('employee')
+        try {
+            const notificationSuccess = req.flash('notificationSuccess');
+            const notificationErr = req.flash('notificationErr'); 
+            const user = req.session.user;   
+  
+            res.render('employee',{
+                notificationErr: notificationErr,
+                notificationSuccess: notificationSuccess,   
+                user:user,             
+            })            
+        } catch (error) {
+            console.error('err',error)
+        }        
     }
 
     async getLogin(req,res){
@@ -32,7 +44,6 @@ class employeeController{
                     res.redirect('/login');
                 } else {
                     req.session.user = results;
-                    console.log('Session User:', req.session.user);
                     req.flash('notificationSuccess', 'Login successful');
                     res.redirect('/home');
                 }

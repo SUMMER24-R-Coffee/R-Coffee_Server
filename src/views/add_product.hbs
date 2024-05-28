@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
+    <script src="/assets/js/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -111,12 +113,12 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
-                        <h3 class="page-title">Add New Product</h3>
+                        <h3 class="page-title">{{title}}</h3>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/home">R'Coffee</a></li>
                                 <li class="breadcrumb-item"><a href="/product">Product</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> Add Product </li>
+                                <li class="breadcrumb-item active" aria-current="page">{{title}} </li>
                             </ol>
                         </nav>
                     </div>
@@ -124,7 +126,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Product Information</h4>
-                                <form class="form-sample">
+                                <form  action="{{#if product_id}}/product/update-product/{{product_id}}?_method=PUT{{else}}/product/add-product/save{{/if}}"  method="POST" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col">
                                             <div class="row">
@@ -132,7 +134,8 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Image</label>
                                                         <div class="col-sm-9">
-                                                            <input type="file" class="form-control" id="img" />
+                                                            <input type="file" class="form-control" name="img" id="img" />
+                                                            <input type="text" name="current_img" hidden>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -142,7 +145,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Name</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" class="form-control" />
+                                                            <input type="text" name="name" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -152,9 +155,10 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Category</label>
                                                         <div class="col-sm-9">
-                                                            <select class="form-control">
-                                                                <option>Male</option>
-                                                                <option>Female</option>
+                                                            <select name="category_id" class="form-control">
+                                                                {{#each categories}}
+                                                                <option value="{{this.category_id}}">{{this.name}}</option>
+                                                                {{/each}}
                                                             </select>
                                                         </div>
                                                     </div>
@@ -165,7 +169,7 @@
                                                     <div class="form-group row">
                                                         <label class="col-sm-3 col-form-label">Price</label>
                                                         <div class="col-sm-9">
-                                                            <input type="Number" class="form-control" />
+                                                            <input type="Number" name="price" class="form-control" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,11 +189,11 @@
                                     <div class="form-group">
                                         <label for="exampleTextarea1">Description</label>
                                         <div class="row ">
-                                            <textarea class="form-control" id="exampleTextarea1" rows="4" ></textarea>                                            
+                                            <textarea class="form-control" name="description" id="exampleTextarea1" rows="4" ></textarea>                                            
                                         </div>
                                     </div> 
                                     <div class="row">
-                                        <button class="btn btn-primary btn-icon-text mx-auto"><i class="mdi mdi-file-check btn-icon-prepend"></i>Add</button>                                   
+                                        <button type="submit" class="btn btn-primary btn-icon-text mx-auto"><i class="mdi mdi-file-check btn-icon-prepend"></i>{{button_type}}</button>                                   
                                     </div>
                                 </form>
                             </div>
@@ -197,12 +201,8 @@
                     </div>
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                                bootstrapdash.com 2020</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard
-                                    template</a>
-                                from Bootstrapdash.com</span>
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©bootstrapdash.com 2020</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <ahref="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboardtemplate</ahref=> from Bootstrapdash.com</span>
                         </div>
                     </footer>
                 </div>
@@ -210,28 +210,36 @@
             </div>
             <!-- page-body-wrapper ends -->
         </div>
+        <div>
+            {{> notification}}            
+        </div>  
+
+        <script id="product-data" type="application/json">
+            {{{json product}}}
+        </script>
+        <script src="/assets/js/fill_data_product.js"></script>                      
         <!-- container-scroller -->
         <!-- plugins:js -->
-        <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+        <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
-        <script src="assets/vendors/chart.js/Chart.min.js"></script>
-        <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.resize.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.categories.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.fillbetween.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.stack.js"></script>
-        <script src="assets/vendors/flot/jquery.flot.pie.js"></script>
+        <script src="/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.resize.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.categories.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.fillbetween.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.stack.js"></script>
+        <script src="/assets/vendors/flot/jquery.flot.pie.js"></script>
         <!-- End plugin js for this page -->
         <!-- inject:js -->
-        <script src="assets/js/off-canvas.js"></script>
-        <script src="assets/js/hoverable-collapse.js"></script>
-        <script src="assets/js/misc.js"></script>
+        <script src="/assets/js/off-canvas.js"></script>
+        <script src="/assets/js/hoverable-collapse.js"></script>
+        <script src="/assets/js/misc.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page -->
-        <script src="assets/js/dashboard.js"></script>
-        <script src="/assets/js/image-preview-single.js"></script>   
+        <script src="/assets/js/dashboard.js"></script>
+        <script src="/assets/js/image-preview-single.js"></script>
+        <script src="/assets/js/notification.js"></script>   
         <!-- End custom js for this page -->
 </body>
 

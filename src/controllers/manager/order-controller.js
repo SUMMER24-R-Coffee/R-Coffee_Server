@@ -1,10 +1,35 @@
 class orderController{
     async order(req,res){
-        res.render('order')
+        
+        try {
+            const notificationSuccess = req.flash('notificationSuccess');
+            const notificationErr = req.flash('notificationErr'); 
+            const user = req.session.user;   
+  
+            res.render('order',{
+                notificationErr: notificationErr,
+                notificationSuccess: notificationSuccess,   
+                user:user,             
+            })            
+        } catch (error) {
+            console.error('err',error)
+        }        
     }
     
     async orderDetail(req, res){
-        res.render('order-detail')
+        try {
+            const notificationSuccess = req.flash('notificationSuccess');
+            const notificationErr = req.flash('notificationErr'); 
+            const user = req.session.user;   
+  
+            res.render('order-detail',{
+                notificationErr: notificationErr,
+                notificationSuccess: notificationSuccess,   
+                user:user,             
+            })            
+        } catch (error) {
+            console.error('err',error)
+        }          
     }
 
 }

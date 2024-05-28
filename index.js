@@ -40,6 +40,20 @@ app.engine('hbs', handlebars.engine({
     },
     helpers:{
         sum: (a, b) => a+b,
+        eq: (a, b) => a === b, 
+        ifCond: (v1, operator, v2, options) => {
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        },
+        json:  (context) => JSON.stringify(context)
+        ,        
+             
     }
 }))
 

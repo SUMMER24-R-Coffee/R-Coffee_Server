@@ -8,11 +8,14 @@ class bannerController{
         try {
             const banners = await BannerModel.getBanner();
             const notificationSuccess = req.flash('notificationSuccess');
-            const notificationErr = req.flash('notificationErr');   
+            const notificationErr = req.flash('notificationErr'); 
+            const user = req.session.user;   
+  
             res.render('banner',{
                 banners:banners,
                 notificationErr: notificationErr,
-                notificationSuccess: notificationSuccess,                
+                notificationSuccess: notificationSuccess,   
+                user:user,             
             })            
         } catch (error) {
             console.error('err',error)
