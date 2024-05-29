@@ -123,44 +123,86 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Oder ID:</h4>
-                                <p>27 December, 2025 at 9:48 PM</p>
-                                <h6>Anntonia | 0368572829 | 137 Nguyễn Thị Thập, Hoà Minh, Liên Chiểu, Đà Nẵng</h6>
+                                {{#each order}}
+                                <h4 class="card-title">Order ID: {{order_id}}</h4>
+                                <p>{{order_date}}</p>
+                                <h6>{{name}} | {{phone}} | {{location}}</h6>
                                 <div class="row mt-4">
                                     <div class="col-12 d-flex align-items-center">
                                         <h4 class="card-title mt-2 mr-4">Status</h4>
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuOutlineButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Pendding
+                                            {{status_order}}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuOutlineButton1">
-                                            <h6 class="dropdown-header">Choose status</h6>
-                                            <a class="dropdown-item" href="#">Preparing</a>
-                                            <a class="dropdown-item" href="#">Ready For packup</a>
-                                            <a class="dropdown-item" href="#">Delivering</a>
-                                            <div class="dropdown-divider">Cancelled</div>
-                                            <a class="dropdown-item" href="#">Deliverd</a>
+                                            {{#if (eq status_order 'pending')}}
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'preparing')">Preparing</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'pick up')">Ready For Pickup</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'cancelled')">Cancelled</a>
+                                            {{/if}}
+
+                                            {{#if (eq status_order 'preparing')}}
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'pick up')">Ready For Pickup</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
+                                            {{/if}}
+
+                                            {{#if (eq status_order 'pick up')}}
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
+                                            {{/if}}
+
+                                            {{#if (eq status_order 'delivering')}}
+                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-between  track ">
-                                    <div class="step active"> <span class="icon"> <i class="mdi mdi-receipt"></i> </span> <h6 class="mt-2" >Pending</h6> </div>
-                                    <div class="step active"> <span class="icon"> <i class="mdi mdi-coffee-to-go"></i> </span> <h6 class="mt-2" > Preparing </h6> </div>
-                                    <div class="step active"> <span class="icon"> <i class="mdi mdi-package-variant"></i> </span> <h6 class="mt-2" > Ready for pickup</h6> </div>
-                                    <div class="step active"> <span class="icon"> <i class="mdi mdi-motorbike"></i> </span> <h6 class="mt-2" > Delivering </h6> </div>
-                                    <div class="step"> <span class="icon"> <i class="mdi mdi-package-variant-closed"></i> </span> <h6 class="mt-2" >Deliverd</h6> </div>
-                                    {{!-- <div class="step"> <span class="icon"> <i class="mdi mdi-close-box-outline"></i> </span> <h6 class="mt-2" >Cancelled</h6> </div> --}}
-                                </div>  
+                                <div class="d-flex justify-content-between track">
+                                    <div class="step active">
+                                        <span class="icon"> <i class="mdi mdi-receipt"></i> </span>
+                                        <h6 class="mt-2">Pending</h6>
+                                    </div>
+                                    
+                                    {{#if (eq status_order 'cancelled')}}
+                                        <div class="step active">
+                                            <span class="icon"> <i class="mdi mdi-close-box-outline"></i> </span>
+                                            <h6 class="mt-2">Cancelled</h6>
+                                        </div>
+                                    {{else}}
+                                        <div class="step {{#if (or (eq status_order 'preparing') (eq status_order 'pick up') (eq status_order 'delivering') (eq status_order 'delivered'))}}active{{/if}}">
+                                            <span class="icon"> <i class="mdi mdi-coffee-to-go"></i> </span>
+                                            <h6 class="mt-2">Preparing</h6>
+                                        </div>
+                                        <div class="step {{#if (or (eq status_order 'pick up') (eq status_order 'delivering') (eq status_order 'delivered'))}}active{{/if}}">
+                                            <span class="icon"> <i class="mdi mdi-package-variant"></i> </span>
+                                            <h6 class="mt-2">Ready for pickup</h6>
+                                        </div>
+                                        <div class="step {{#if (or (eq status_order 'delivering') (eq status_order 'delivered'))}}active{{/if}}">
+                                            <span class="icon"> <i class="mdi mdi-motorbike"></i> </span>
+                                            <h6 class="mt-2">Delivering</h6>
+                                        </div>
+                                        <div class="step {{#if (eq status_order 'delivered')}}active{{/if}}">
+                                            <span class="icon"> <i class="mdi mdi-package-variant-closed"></i> </span>
+                                            <h6 class="mt-2">Delivered</h6>
+                                        </div>
+                                    {{/if}}
+                                </div>
+                                {{/each}}
                                 <h4 class="card-title">Order Items</h4>                                
                                 <div class="row">
-                                    <div class="card" style="width: 15rem;">
-                                    <img class="card-img-top" src="/assets/images/img_default.png" alt="Card image cap">
+                                    {{#each basket}}
+                                    <div class="card mr-2" style="width: 15rem">
+                                        <img class="card-img-top" src="{{product_img}}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h5 class="">Capuccino</h5>
-                                            <p class="card-text">35.000đ x 6</p>
-                                            <a href="#" class="btn btn-primary">Detail</a>
+                                            <h5 class="">{{product_name}}</h5>
+                                            <p class="card-text">{{price}}đ x {{quantity}}</p>
                                         </div>
-                                    </div>                                     
+                                    </div>  
+                                    {{/each}}                                   
                                 </div>
+                                {{#each order}}
                                 <h4 class="card-title mt-4 mb-4">Order Summary</h4>      
                                 <div class="row">
                                     <div class="col">
@@ -171,26 +213,24 @@
                                         <p>Discount</p>
                                         <h6>Total Pay</h6>
                                     </div>
-                                    <div class="col">
-                                        <p class="text-end">Zalo Pay</p>
-                                        <p class="text-end">RC00438</p>
-                                        <p class="text-end">7</p>
-                                        <p class="text-end">135.000 đ</p>
-                                        <p class="text-end">25.000 đ</p>
-                                        <h6 class="text-end">110.000 đ</h6>
+                                    <div class="col ">
+                                        <p class="text-right-align">{{payment_method}}</p>
+                                        <p class="text-right-align">{{voucher_code}}</p>
+                                        <p class="text-right-align">{{total_quantity}} (items)</p>
+                                        <p class="text-right-align">{{totalWithDiscount}}  đ</p>
+                                        <p class="text-right-align">{{discount_amount}} đ</p>
+                                        <h6 class="text-right-align">{{total_amount}} đ</h6>
                                     </div>
-                                </div>                          
+                                </div> 
+                                {{/each}}                         
                             </div>
+
                         </div>
                     </div>
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                                bootstrapdash.com 2020</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard
-                                    template</a>
-                                from Bootstrapdash.com</span>
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a>from Bootstrapdash.com</span>
                         </div>
                     </footer>
                 </div>
@@ -203,7 +243,7 @@
             {{> notification}}            
         </div>        
         <!-- container-scroller -->
-        <!-- plugins:js -->
+        <!-- plugins:js -->    
         <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
         <!-- endinject -->
         <!-- Plugin js for this page -->
@@ -222,8 +262,7 @@
         <script src="/assets/js/misc.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page -->
-        <script src="/assets/js/dashboard.js"></script>
-        <script src="/assets/js/image-preview-single.js"></script>  
+        <script src="/assets/js/status-order-change.js"></script>  
         <script src="/assets/js/notification.js"></script>
         <!-- End custom js for this page -->
 </body>

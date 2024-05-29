@@ -51,8 +51,12 @@ app.engine('hbs', handlebars.engine({
                     return options.inverse(this);
             }
         },
-        json:  (context) => JSON.stringify(context)
-        ,        
+        json:  (context) => JSON.stringify(context),
+        or: function () {
+            const args = Array.prototype.slice.call(arguments, 0, -1);
+            return args.some(Boolean);
+        }, 
+        gt: (a, b) => a > b,                             
              
     }
 }))

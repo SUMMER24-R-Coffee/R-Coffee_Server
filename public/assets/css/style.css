@@ -15611,5 +15611,8 @@ dl {
     transform: translateX(100%);
   }
 }
+.text-right-align{
+  text-align: right;
+}
 
 /*# sourceMappingURL=style.css.map */

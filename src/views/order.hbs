@@ -138,19 +138,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each orders}}
                                         <tr>
-                                            <td>1</td>
-                                            <td>RC000233</td>
-                                            <td>1/1/2025</td>
-                                            <td>12:30:23</td>
-                                            <td>135.000 đ</td>
+                                            <td>{{ sum 1 @ index}}</td>
+                                            <td>{{order_id}}</td>
+                                            <td>{{_date}}</td>
+                                            <td>{{_time}}</td>
+                                            <td>{{total_amount}} đ</td>
                                             <td>
-                                                <label class="badge badge-success">Completed</label>
+                                                <label class="badge {{this.statusClass}}">{{status_order}}</label>
                                             </td>
                                             <td>
-                                                <a href="/order/order-detail" class="btn btn-primary btn-icon-text">Detail<i class="mdi mdi-file-check btn-icon-append"></i></a>
+                                                <a href="/order/order-detail/{{order_id}}" class="btn btn-primary btn-icon-text">Detail<i class="mdi mdi-file-check btn-icon-append"></i></a>
                                             </td>
                                         </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -158,12 +160,8 @@
                     </div>
                     <footer class="footer">
                         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                                bootstrapdash.com 2020</span>
-                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                    href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard
-                                    template</a>
-                                from Bootstrapdash.com</span>
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <ahref="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</ahref=> from Bootstrapdash.com</span>
                         </div>
                     </footer>
                 </div>

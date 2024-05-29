@@ -22,8 +22,8 @@ class voucherController{
             
                 return {
                     ...voucher,
-                    formatted_valid_date: dateTimeFormat(voucher.valid_date),
-                    formatted_exp_date: dateTimeFormat(voucher.exp_date),
+                    formatted_valid_date: dateTimeFormat.formatDateTime(voucher.valid_date),
+                    formatted_exp_date: dateTimeFormat.formatDateTime(voucher.exp_date),
                     statusClass,
                     statusText
                 };

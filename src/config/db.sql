@@ -34,14 +34,6 @@ CREATE TABLE IF NOT EXISTS Address (
     FOREIGN KEY (email_user) REFERENCES Users(email_user)
 );
 
-CREATE TABLE IF NOT EXISTS Basket (
-    basket_id INT PRIMARY KEY AUTO_INCREMENT,
-    quantity INT NOT NULL,
-    product_id INT,
-    email_user VARCHAR(255),
-    FOREIGN KEY (product_id) REFERENCES Product(product_id),
-    FOREIGN KEY (email_user) REFERENCES Users(email_user)
-);
 
 CREATE TABLE IF NOT EXISTS Voucher (
     voucher_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -49,6 +41,15 @@ CREATE TABLE IF NOT EXISTS Voucher (
     percent DOUBLE NOT NULL,
     valid_date DATE NOT NULL,
     exp_date DATE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Basket (
+    basket_id INT PRIMARY KEY AUTO_INCREMENT,
+    quantity INT NOT NULL,
+    product_id INT,
+    email_user VARCHAR(255),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id),
+    FOREIGN KEY (email_user) REFERENCES Users(email_user)
 );
 
 CREATE TABLE IF NOT EXISTS `Order` (
@@ -62,13 +63,9 @@ CREATE TABLE IF NOT EXISTS `Order` (
     status_order ENUM('pending', 'preparing', 'pick up' ,'delivering', 'cancelled', 'delivered') NOT NULL DEFAULT 'pending',
     address_id INT,
     voucher_id INT,
-    basket_id INT,
-    email_user VARCHAR(255),
     order_message VARCHAR,
     FOREIGN KEY (address_id) REFERENCES Address(address_id),
     FOREIGN KEY (voucher_id) REFERENCES Voucher(voucher_id),
-    FOREIGN KEY (basket_id) REFERENCES Basket(basket_id),
-    FOREIGN KEY (email_user) REFERENCES Users(email_user)
 );
 
 CREATE TABLE IF NOT EXISTS Rating (
