@@ -56,7 +56,14 @@ app.engine('hbs', handlebars.engine({
             const args = Array.prototype.slice.call(arguments, 0, -1);
             return args.some(Boolean);
         }, 
-        gt: (a, b) => a > b,                             
+        gt: (a, b) => a > b,   
+        formatCurrency: (number, currencyCode) => {
+            const formatter = new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: currencyCode,
+            });
+            return formatter.format(number);
+        },                                  
              
     }
 }))

@@ -17,48 +17,9 @@
   <body>
     <div class="container-scroller">
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div class="text-center sidebar-brand-wrapper d-flex align-items-center">
-          <a class="sidebar-brand brand-logo" href="/home"><img src="assets/images/logo.svg" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini pl-4 pt-3" href="/home"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
-        </div>
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/home">
-              <i class="mdi mdi-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/banner">
-              <i class="mdi mdi-folder-multiple-image menu-icon"></i>
-              <span class="menu-title">Banner</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/voucher">
-              <i class="mdi mdi-ticket-confirmation menu-icon"></i>
-              <span class="menu-title">Voucher</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/product">
-              <i class="mdi mdi-coffee menu-icon"></i>
-              <span class="menu-title">Product</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/order">
-              <i class="mdi mdi-table-large menu-icon"></i>
-              <span class="menu-title">Order</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/employee">
-              <i class="mdi mdi-account-multiple menu-icon"></i>
-              <span class="menu-title">Employee</span>
-            </a>
-          </li>
-        </ul>
+       <div>
+        {{> slidebar}}
+       </div>
       </nav>
       <div class="container-fluid page-body-wrapper">
         <div id="theme-settings" class="settings-panel">
@@ -76,33 +37,10 @@
             <div class="tiles dark"></div>
           </div>
         </div>
-        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
-          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
-            <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
-            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
-              <i class="mdi mdi-menu"></i>
-            </button>
-            <ul class="navbar-nav">
-            </ul>
-            <ul class="navbar-nav navbar-nav-right ml-lg-auto">
-              <li class="nav-item nav-profile dropdown border-0">
-                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
-                  <img class="nav-profile-img mr-2" alt="" src="{{user.emp_img}}" />
-                  <span class="profile-name">{{user.emp_name}}</span>
-                </a>
-                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                  <a class="dropdown-item" href="#">
-                    <i class="mdi mdi-cached mr-2 text-success"></i> Account </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
-                </div>
-              </li>
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-              <span class="mdi mdi-menu"></span>
-            </button>
-          </div>
-        </nav>
+        <div>
+          {{> nav}}
+        </div>
+
         <div class="main-panel">
           <div class="content-wrapper pb-0">
             <div class="page-header flex-wrap">
@@ -117,10 +55,10 @@
                         <div class="d-flex justify-content-between align-items-start">
                           <div class="color-card">
                             <p class="mb-0 color-card-head">Order Amount</p>
-                            <h2 class="text-white"> đ{{amtLM.total_amount}}<span class="h5">00</span>
+                            <h2 class="text-white"> {{formatCurrency amtLM.total_amount  'vnd'}}</span>
                             </h2>
                           </div>
-                          <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"></i>
+                          <i class="card-icon-indicator mdi mdi-square-inc-cash bg-inverse-icon-warning"></i>
                         </div>
                         <h6 class="text-white">Since last month</h6>
                       </div>
@@ -150,7 +88,7 @@
                             <h2 class="text-white">{{itemOrdLM.total_quantity}}<span class="h5"></span>
                             </h2>
                           </div>
-                          <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                          <i class="card-icon-indicator mdi mdi-stack-overflow bg-inverse-icon-primary"></i>
                         </div>
                         <h6 class="text-white">Since last month</h6>
                       </div>
@@ -164,7 +102,7 @@
                             <p class="mb-0 color-card-head">Cancelled</p>
                             <h2 class="text-white">{{ordCancelLM.total_orders}}</h2>
                           </div>
-                          <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
+                          <i class="card-icon-indicator mdi mdi-bookmark-remove bg-inverse-icon-success"></i>
                         </div>
                         <h6 class="text-white">Since last month</h6>
                       </div>
@@ -187,7 +125,7 @@
                             <p class="m-0 survey-head">Today Earnings</p>
                             <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
                               <div>
-                                <h3 class="m-0 survey-value">{{amtT.total_amount}} đ</h3>
+                                <h3 class="m-0 survey-value">{{ formatCurrency amtT.total_amount 'vnd'}}</h3>
                                 <p class="text-success m-0"></p>
                               </div>
                               <div id="earningChart" class="flot-chart"></div>
@@ -216,7 +154,7 @@
                               <div>
                                 <h3 class="m-0 survey-value">{{itemOrdT.total_quantity}}</h3>
                               </div>
-                              <div id="orderChart" class="flot-chart"></div>
+                              <div id="orderChart" class="flot-chart "></div>
                             </div>
                           </div>
                         </div>
@@ -235,17 +173,17 @@
                       <div class="col-sm-4">
                         <p class="mb-0 text-muted">Ordered </p>
                         <h5 class="d-inline-block survey-value mb-0"> {{ord12.total_orders}} order</h5>
-                        <p class="d-inline-block text-danger mb-0"> last 12 months </p>
+                        <p class="d-inline-block text-info mb-0"> last 12 months </p>
                       </div>
                       <div class="col-sm-4">
                         <p class="mb-0 text-muted">Total items</p>
                         <h5 class="d-inline-block survey-value mb-0"> {{itemOrd12.total_quantity}} item</h5>
-                        <p class="d-inline-block text-danger mb-0"> last 12 months </p>
+                        <p class="d-inline-block text-info mb-0"> last 12 months </p>
                       </div>                                            
                       <div class="col-sm-4">
                         <p class="mb-0 text-muted">Ordered Amount</p>
-                        <h5 class="d-inline-block survey-value mb-0"> {{amt12M.total_amount}} đ</h5>
-                        <p class="d-inline-block text-danger mb-0"> last 12 months </p>
+                        <h5 class="d-inline-block survey-value mb-0"> {{formatCurrency amt12M.total_amount 'vnd'}}</h5>
+                        <p class="d-inline-block text-info mb-0"> last 12 months </p>
                       </div>
                     </div>
                   </div>
@@ -253,19 +191,14 @@
               </div>
             </div>
           </div>
-          <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a> from Bootstrapdash.com</span>
-            </div>
-          </footer>
+          <div>
+            {{> footer}}
+          </div>
         </div>
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-
-
     <!--notification-->
     <div>
         {{> notification}}            
