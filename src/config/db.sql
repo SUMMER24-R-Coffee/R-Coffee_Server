@@ -111,3 +111,94 @@ CREATE TABLE IF NOT EXISTS Employee (
     emp_phone VARCHAR(15),
     is_wrorking BOOLEAN DEFAULT TRUE
 );
+
+
+---SQL total amount through out 12 month
+-- Generate a series of the last 12 months
+WITH months AS (
+    SELECT DATE_FORMAT(NOW() - INTERVAL (n.number) MONTH, '%Y-%m') AS month
+    FROM (
+        SELECT 0 AS number
+        UNION ALL SELECT 1
+        UNION ALL SELECT 2
+        UNION ALL SELECT 3
+        UNION ALL SELECT 4
+        UNION ALL SELECT 5
+        UNION ALL SELECT 6
+        UNION ALL SELECT 7
+        UNION ALL SELECT 8
+        UNION ALL SELECT 9
+        UNION ALL SELECT 10
+        UNION ALL SELECT 11
+    ) AS n
+)
+SELECT 
+    m.month,
+    COALESCE(SUM(o.total_amount), 0) AS total_amount
+FROM months m
+LEFT JOIN `order` o ON DATE_FORMAT(o.order_date, '%Y-%m') = m.month
+    AND o.status_order = 'delivered'
+    AND o.order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+GROUP BY m.month
+ORDER BY m.month;
+
+--- quantity
+-- Generate a series of the last 12 months
+WITH months AS (
+    SELECT DATE_FORMAT(NOW() - INTERVAL (n.number) MONTH, '%Y-%m') AS month
+    FROM (
+        SELECT 0 AS number
+        UNION ALL SELECT 1
+        UNION ALL SELECT 2
+        UNION ALL SELECT 3
+        UNION ALL SELECT 4
+        UNION ALL SELECT 5
+        UNION ALL SELECT 6
+        UNION ALL SELECT 7
+        UNION ALL SELECT 8
+        UNION ALL SELECT 9
+        UNION ALL SELECT 10
+        UNION ALL SELECT 11
+    ) AS n
+)
+SELECT 
+    m.month,
+    COALESCE(SUM(b.quantity), 0) AS total_quantity
+FROM months m
+LEFT JOIN `order` o ON DATE_FORMAT(o.order_date, '%Y-%m') = m.month
+    AND o.status_order = 'delivered'
+    AND o.order_date =>= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+LEFT JOIN `basket` b ON o.order_id = b.order_id
+GROUP BY m.month
+ORDER BY m.month;
+
+---combine
+-- Generate a series of the last 12 months
+WITH months AS (
+    SELECT DATE_FORMAT(NOW() - INTERVAL (n.number) MONTH, '%Y-%m') AS month
+    FROM (
+        SELECT 0 AS number
+        UNION ALL SELECT 1
+        UNION ALL SELECT 2
+        UNION ALL SELECT 3
+        UNION ALL SELECT 4
+        UNION ALL SELECT 5
+        UNION ALL SELECT 6
+        UNION ALL SELECT 7
+        UNION ALL SELECT 8
+        UNION ALL SELECT 9
+        UNION ALL SELECT 10
+        UNION ALL SELECT 11
+    ) AS n
+)
+SELECT 
+    m.month,
+    COALESCE(SUM(b.quantity), 0) AS total_quantity,
+    COALESCE(SUM(o.total_amount), 0) AS total_amount
+FROM months m
+LEFT JOIN `order` o ON DATE_FORMAT(o.order_date, '%Y-%m') = m.month
+    AND o.status_order = 'delivered'
+    AND o.order_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
+LEFT JOIN `basket` b ON o.order_id = b.order_id
+GROUP BY m.month
+ORDER BY m.month;
