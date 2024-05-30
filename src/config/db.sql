@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS Users (
     gender VARCHAR(10),
     phone VARCHAR(15),
     user_img VARCHAR(255)
+    name VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS Address (

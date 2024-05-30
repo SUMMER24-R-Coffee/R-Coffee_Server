@@ -134,25 +134,22 @@
                                             <th>Name</th>
                                             <th>Gender</th>
                                             <th>Phone</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {{#each employees}}
                                         <tr>
-                                            <td>1</td>
-                                            <td class="p-2 text-center"><img src="/assets/images/img_default.png"></td>
-                                            <td>Anntonia</td>
-                                            <td>Male</td>
-                                            <td>0368572829</td>
-                                            <td><label class="badge badge-warning">Resignation</label></td>
+                                            <td>{{sum 1 @ index}}</td>
+                                            <td class="text-center col-md-5"><img style="object-fit: cover;" class="img-fluid rounded w-25 h-25" src="{{emp_img}}" alt=""></td>
+                                            <td>{{emp_name}}</td>
+                                            <td>{{emp_gender}}</td>
+                                            <td>{{emp_phone}}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-icon-text mx-auto">Detail<i
-                                                        class="mdi mdi-file-check btn-icon-append"></i></button>
-                                                <button class="btn btn-danger btn-icon-text mx-auto">Remove<i
-                                                        class="mdi mdi-file-check btn-icon-prepend"></i></button>
+                                                <button class="btn btn-danger btn-icon-text mx-auto"  data-toggle="modal" data-target="#delete-active" data-id="{{emp_id}}">Remove<i class="mdi mdi-file-check btn-icon-prepend"></i></button>
                                             </td>
                                         </tr>
+                                        {{/each}}
                                     </tbody>
                                 </table>
                             </div>
@@ -169,7 +166,7 @@
                                 <div class="modal-body">
                                     <div class="card">
                                         <div class="card-body">
-                                            <form class="form-sample">
+                                            <form class="form-sample" action="/employee/save" method="POST" enctype="multipart/form-data">
                                                 <div class="col px-0 mb-5">
                                                     <div class="form-group col-sm-3 mb-0 px-0">
                                                         <label class="col-form-label">Image Preview</label>
@@ -210,7 +207,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label px-0">Gender</label>
                                                             <div class="col-sm-9">
-                                                                <input class="form-control" />
+                                                                <input class="form-control" name="emp_gender" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +217,7 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label">Phone</label>
                                                             <div class="col-sm-9">
-                                                                <input class="form-control" />
+                                                                <input class="form-control" name="emp_phone" />
                                                             </div>                                                            
                                                         </div>
                                                     </div>
@@ -228,19 +225,17 @@
                                                         <div class="form-group row">
                                                             <label class="col-sm-3 col-form-label px-0">Image</label>
                                                             <div class="col-sm-9">
-                                                                <input type="file" class="form-control" id="img" />
+                                                                <input type="file" class="form-control" id="img" name="img" />
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="row d-flex justify-content-center align-items-center mt-2">
+                                                        <button type="submit" class="ml-2 btn btn-danger btn-icon-text"><i class="mdi mdi-upload btn-icon-prepend"></i> Save</button>
+                                                        <button type="button" class="ml-2 btn btn-warning btn-icon-text" data-dismiss="modal"><i class="mdi mdi-close"></i> Cancel</button>
+                                                    </div>                                                    
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
-                                    <div class="row d-flex justify-content-center align-items-center mt-2">
-                                        <button type="button" class="ml-2 btn btn-danger btn-icon-text"><i
-                                                class="mdi mdi-upload btn-icon-prepend"></i> Save</button>
-                                        <button type="button" class="ml-2 btn btn-warning btn-icon-text"
-                                            data-dismiss="modal"><i class="mdi mdi-close"></i> Cancel</button>
                                     </div>
                                 </div>
                             </div>
@@ -261,6 +256,10 @@
             <!-- main-panel ends -->
         </div>
         <!-- page-body-wrapper ends -->
+    </div>
+    <!--delete-->
+    <div>
+        {{> delete}}
     </div>
     <!--notification-->
     <div>
@@ -287,8 +286,7 @@
     <!-- endinject -->
     <script src="assets/js/image-preview-single.js"></script>
     <script src="assets/js/notification.js"></script>
-    <!-- Custom js for this page -->
-    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/delete-employee.js"></script>
     <!-- End custom js for this page -->
 </body>
 
