@@ -29,7 +29,6 @@ class voucherController{
                 };
             }); 
             
-            console.log('🌶️🌶️🌶️🌶️', formattedVouchers)
 
             res.render('voucher', {
                 notificationErr: notificationErr,

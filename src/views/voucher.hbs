@@ -99,31 +99,35 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="card">
-                                        <form id="voucherForm" method="POST">
+                                        <form  id="voucherForm" method="POST">
                                             <div class="card-body">
                                                 <input type="hidden" id="voucher_id" name="voucher_id" />
                                                 <div class="form-group row mb-0">
                                                     <label class="col-sm-3 col-form-label">Voucher</label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" id="voucher_code" name="voucher_code" />
+                                                        <div class="invalid-feedback">Voucher must have 10 digits.</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mb-0">
                                                     <label class="col-sm-3 col-form-label">Percent</label>
                                                     <div class="col-sm-9">
                                                         <input type="number" class="form-control" id="percent" name="percent" />
+                                                        <div class="invalid-feedback">Percent can't exceed 50.</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mb-0">
                                                     <label class="col-sm-3 col-form-label">Available Date</label>
                                                     <div class="col-sm-9">
                                                         <input type="datetime-local" class="form-control" id="valid_date" name="valid_date" />
+                                                        <div class="invalid-feedback"></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mb-0">
                                                     <label class="col-sm-3 col-form-label">Expired Date</label>
                                                     <div class="col-sm-9">
                                                         <input type="datetime-local" class="form-control" id="exp_date" name="exp_date" />
+                                                        <div class="invalid-feedback">Expired date is invalid.</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,6 +184,7 @@
     <script src="assets/js/notification.js"></script>
     <script src="assets/js/delete-voucher.js"></script>
     <script src="assets/js/voucher-form.js"></script>
+    <script src="assets/js/voucher-validation.js"></script>
     <!-- End custom js for this page -->
 </body>
 

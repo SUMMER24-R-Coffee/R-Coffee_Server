@@ -8,15 +8,15 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-sample" action="/account/update/{{user.emp_id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                        <form class="form-sample" action="/account/update/{{ user.emp_id }}?_method=PUT" method="POST" enctype="multipart/form-data">
                             <div class="col px-0 mb-5">
                                 <div class="form-group col-sm-3 mb-0 px-0">
                                     <label class="col-form-label">Image Preview</label>
                                 </div>
                                 <div class="text-center">
                                     <div class="preview-images" id="previewImages"></div>
-                                    <img src="{{user.emp_img}}" alt="Placeholder Image" class="preview-image col-sm-3" id="img-preview-account">
-                                    <input type="text" name="current_img" value="{{user.emp_img}}" style="display: none;">
+                                    <img src="{{ user.emp_img }}" alt="Placeholder Image" class="preview-image col-sm-3" id="img-preview-account">
+                                    <input type="text" name="current_img" value="{{ user.emp_img }}" style="display: none;">
                                 </div>
                             </div>
                             <div class="row">
@@ -24,7 +24,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">ID</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="emp_id" value="{{user.emp_id}}" readonly />
+                                            <input type="text" class="form-control" name="emp_id" value="{{ user.emp_id }}" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -32,7 +32,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label px-0">Password</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="emp_password" value="{{user.emp_password}}" />
+                                            <input type="text" class="form-control" name="emp_password" value="{{ user.emp_password }}" />
+                                            <div class="invalid-feedback">Password must be at least 8 characters long.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +43,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Name</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="emp_name" value="{{user.emp_name}}" />
+                                            <input class="form-control" type="text" name="emp_name" value="{{ user.emp_name }}" />
+                                            <div class="invalid-feedback">Name cannot be empty.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +52,20 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label px-0">Gender</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" name="emp_gender" value="{{user.emp_gender}}" />
+                                            <select class="form-control" name="emp_gender">
+                                                <option value="">Select Gender</option>
+                                                {{#ifCond user.emp_gender '==' 'male'}}
+                                                    <option value="male" selected>Male</option>
+                                                {{else}}
+                                                    <option value="male">Male</option>
+                                                {{/ifCond}}
+                                                {{#ifCond user.emp_gender '==' 'female'}}
+                                                    <option value="female" selected>Female</option>
+                                                {{else}}
+                                                    <option value="female">Female</option>
+                                                {{/ifCond}}
+                                            </select>
+                                            <div class="invalid-feedback">Gender must be 'male' or 'female'.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +75,8 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Phone</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" name="emp_phone" value="{{user.emp_phone}}" />
+                                            <input class="form-control" name="emp_phone" value="{{ user.emp_phone }}" />
+                                            <div class="invalid-feedback">Phone must be 10-15 digits long.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +85,7 @@
                                         <label class="col-sm-3 col-form-label px-0">Image</label>
                                         <div class="col-sm-9">
                                             <input type="file" class="form-control" id="emp_img" name="emp_img" />
+                                            <div class="invalid-feedback">Invalid file type. Only JPEG, PNG, or GIF are allowed.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,3 +102,4 @@
     </div>
 </div>
 <script src="assets/js/img-preview-account.js"></script>
+<script src="assets/js/account-validation.js"></script>
