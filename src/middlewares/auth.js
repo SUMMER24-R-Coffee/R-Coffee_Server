@@ -1,16 +1,23 @@
-const authServer = async (req,res,next)=>{
-    if (!req.session.user) {
-        return res.redirect('/login'); 
-      }
-    
-      if (req.session.user[0].emp_role !== 'manager') {
-        req.flash('notificationErr', 'You cannot access this function');
-        return res.redirect('/home');
-      }
-      next();    
-}
+const authCheck = async (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+  next();
+};
+const authByRole = async (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+
+  console.log("User 😬😬😬😬", req.session.user[0]);
+  if (req.session.user.emp_role !== "manager") {
+    req.flash("notificationErr", "You cannot access this function");
+    return res.redirect("/home");
+  }
+  next();
+};
 
 module.exports = {
-    authServer,
-
+  authCheck,
+  authByRole
 }

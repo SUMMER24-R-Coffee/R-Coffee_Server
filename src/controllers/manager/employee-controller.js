@@ -11,6 +11,7 @@ class employeeController{
             const notificationErr = req.flash('notificationErr'); 
             const user = req.session.user;   
   
+            console.log(user)
             res.render('employee',{
                 notificationErr: notificationErr,
                 notificationSuccess: notificationSuccess,   
