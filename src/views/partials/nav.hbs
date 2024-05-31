@@ -14,9 +14,9 @@
                     <span class="profile-name">{{user.emp_name}}</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi mdi-account-card-details mr-2 text-success"></i> Account </a>
-                    <a class="dropdown-item" href="#">
+                    <button class="dropdown-item" data-toggle="modal" data-target="#updateEmp">
+                        <i class="mdi mdi mdi-account-card-details mr-2 text-success"></i> Account </button>
+                    <a class="dropdown-item" href="/logout">
                         <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
                 </div>
             </li>
@@ -27,3 +27,7 @@
         </button>
     </div>
 </nav>
+<div>
+
+</div>
+{{> account}}

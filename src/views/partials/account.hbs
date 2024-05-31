@@ -1,0 +1,87 @@
+<div class="modal fade" id="updateEmp" tabindex="-1" aria-labelledby="updateEmpLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content card col-md-6 mx-auto">
+            <div class="modal-header card-body">
+                <h4 class="card-title mb-0" id="updateEmpmodalLabel">Change Information</h4>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form class="form-sample" action="/account/update/{{user.emp_id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+                            <div class="col px-0 mb-5">
+                                <div class="form-group col-sm-3 mb-0 px-0">
+                                    <label class="col-form-label">Image Preview</label>
+                                </div>
+                                <div class="text-center">
+                                    <div class="preview-images" id="previewImages"></div>
+                                    <img src="{{user.emp_img}}" alt="Placeholder Image" class="preview-image col-sm-3" id="img-preview-account">
+                                    <input type="text" name="current_img" value="{{user.emp_img}}" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">ID</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="emp_id" value="{{user.emp_id}}" readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label px-0">Password</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" name="emp_password" value="{{user.emp_password}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Name</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text" name="emp_name" value="{{user.emp_name}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label px-0">Gender</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="emp_gender" value="{{user.emp_gender}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Phone</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="emp_phone" value="{{user.emp_phone}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label px-0">Image</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" class="form-control" id="emp_img" name="emp_img" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row d-flex justify-content-center align-items-center mt-2">
+                                    <button type="submit" class="ml-2 btn btn-danger btn-icon-text"><i class="mdi mdi-upload btn-icon-prepend"></i> Save</button>
+                                    <button type="button" class="ml-2 btn btn-warning btn-icon-text" data-dismiss="modal"><i class="mdi mdi-close"></i> Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/img-preview-account.js"></script>

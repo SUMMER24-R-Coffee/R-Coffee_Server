@@ -40,25 +40,25 @@ class HomeController {
             const totalAmounts = revenueLast12Month.map(row => row.total_amount);
             const totalOrders= revenueLast12Month.map(row => row.total_orders)
             
-            console.log('Month 🔥🔥🔥:', months);
-            console.log('quantity 😬😬😬😬:', totalQuantities);
-            console.log('amount 🙄🙄🙄🙄', totalAmounts);
-            console.log('totalOrders 🙄🙄🙄🙄', totalOrders);
+            // console.log('Month 🔥🔥🔥:', months);
+            // console.log('quantity 😬😬😬😬:', totalQuantities);
+            // console.log('amount 🙄🙄🙄🙄', totalAmounts);
+            // console.log('totalOrders 🙄🙄🙄🙄', totalOrders);
 
 
 
-            console.log('Amount Last Month:', amountLastMonth);
-            console.log('Amount Today:', amountToday);
-            console.log('Order Last Month:', orderLastMonth);
-            console.log('Order Today:', orderToday);
-            console.log('Item Order Last Month:', itemOrdLastMonth);
-            console.log('Item Order Today:', itemOrdToday);
-            console.log('Order Cancelled Today:', ordCancelToday);
-            console.log('Order Cancelled Last Month:', ordCancelLastMonth);
-            console.log('Revenue Last 12 Month:', revenueLast12Month);
-            console.log('Total Amount Last 12 Month:', totalAmountLast12Month);
-            console.log('Total Items Last 12 Month:', itemOrd12Month);
-            console.log('Total ORder Last 12 Month:', ord12Month);
+            // console.log('Amount Last Month:', amountLastMonth);
+            // console.log('Amount Today:', amountToday);
+            // console.log('Order Last Month:', orderLastMonth);
+            // console.log('Order Today:', orderToday);
+            // console.log('Item Order Last Month:', itemOrdLastMonth);
+            // console.log('Item Order Today:', itemOrdToday);
+            // console.log('Order Cancelled Today:', ordCancelToday);
+            // console.log('Order Cancelled Last Month:', ordCancelLastMonth);
+            // console.log('Revenue Last 12 Month:', revenueLast12Month);
+            // console.log('Total Amount Last 12 Month:', totalAmountLast12Month);
+            // console.log('Total Items Last 12 Month:', itemOrd12Month);
+            // console.log('Total ORder Last 12 Month:', ord12Month);
 
             console.log('User:', user);
 

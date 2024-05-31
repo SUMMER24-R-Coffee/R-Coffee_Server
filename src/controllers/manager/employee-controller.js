@@ -60,6 +60,21 @@ class employeeController{
         }
     }
 
+    async checkOut(req, res){
+        try {
+            if (req.session.user){ 
+                req.session.destroy();
+            }
+            res.redirect('/login')
+            
+        } catch (error) {
+            req.flash("notificationErr", "Error" + error);
+            res.redirect("back")
+
+        }
+          
+    }
+
     async insertEmployee(req, res){
         upload.single("img")(req, res, async function(err) {
             if (err) {
@@ -87,8 +102,9 @@ class employeeController{
               const insertValues = [emp_id, emp_password, emp_name, emp_gender, emp_img, emp_phone];
               console.log('🙄🙄🙄🙄', insertValues)
               const checkEmpID = await EmployeeModel.checkEmployee(emp_id);
+              console.log('check 🙄', checkEmpID)
 
-              if(checkEmpID.length >0){
+              if(checkEmpID[0].count > 0){
                 req.flash("notificationErr", "Employee ID has been used.");
                 res.redirect("/employee");
                 return;
@@ -105,6 +121,66 @@ class employeeController{
             }
           });        
 
+    }
+
+    async updateEmployee (req, res){
+        upload.single("emp_img")(req, res, async function (err) {
+            if (err) {
+                console.error("Error uploading image:", err);
+                req.flash("notificationErr", "Error uploading image.");
+                return res.redirect('back');
+            }
+    
+            const { emp_password, emp_name, emp_gender, emp_phone, emp_id, current_img } = req.body;
+            let new_img, publicId;
+    
+            try {
+                if (req.file) {
+                    const publicIdMatch = current_img.match(/\/v\d+\/(.+?)\.\w+$/);
+                    if (publicIdMatch && publicIdMatch[1]) {
+                        publicId = publicIdMatch[1];
+                        if (publicId) {
+                            await cloudinary.uploader.destroy(publicId);
+                        }
+                    }
+    
+                    const result = await cloudinary.uploader.upload(req.file.path, {
+                        resource_type: "image",
+                        folder: "rcoffee/employee"
+                    });
+                    new_img = result.secure_url;
+                }
+    
+                const updateValues = {
+                    emp_password,
+                    emp_img: new_img ? new_img : current_img,
+                    emp_name,
+                    emp_gender,
+                    emp_phone,
+                    emp_id
+                };
+    
+                await EmployeeModel.updateEmployee(updateValues);
+    
+                req.session.user = {
+                    ...req.session.user,
+                    emp_password,
+                    emp_name,
+                    emp_gender,
+                    emp_phone,
+                    emp_img: new_img ? new_img : current_img,
+                    emp_id
+                };
+
+    
+                req.flash("notificationSuccess", "Information updated successfully.");
+                res.redirect('back');
+            } catch (error) {
+                console.error("Error updating information:", error.message);
+                req.flash("notificationErr", "Error updating information: " + error.message);
+                res.redirect('back');
+            }
+        });
     }
     
     async deleteEmployee (req, res){

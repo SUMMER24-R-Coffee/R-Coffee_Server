@@ -35,12 +35,18 @@ const insertEmployee = async (values)=>{
     return await connection.queryDatabase(query, values);
 }
 
-const updateEmployee = async (values)=>{
-    const query = `UPDATE employee SET emp_password = ?, emp_name= ?, emp_gender = ?, emp_img = ?, emp_phone = ? WHERE emp_id = ? `;
+const updateEmployee = async (values) => {
+    let query = `UPDATE employee SET emp_password = ?, emp_name = ?, emp_gender = ?, emp_phone = ? `;
+    const queryParams = [values.emp_password, values.emp_name, values.emp_gender, values.emp_phone, values.emp_id];
 
-    return await connection.queryDatabase(query, values);
+    if (values.emp_img) {
+        query = `UPDATE employee SET emp_password = ?, emp_img = ?, emp_name = ?, emp_gender = ?, emp_phone = ? `;
+        queryParams.splice(1, 0, values.emp_img);
+    }
 
-}
+    query += 'WHERE emp_id = ?';
+    return await connection.queryDatabase(query, queryParams);
+};
 
 const deleteEmployee = async (emp_id) =>{
     const query = `UPDATE employee SET is_working = false WHERE emp_id=?`;
