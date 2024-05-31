@@ -15549,7 +15549,7 @@ dl {
     border-radius: 4px;
     overflow: hidden;
     position: fixed;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
     z-index: 10000000; 
     opacity: 0; 
