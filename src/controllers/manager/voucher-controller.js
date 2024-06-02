@@ -38,7 +38,7 @@ class voucherController{
             });            
         } catch (error) {
             console.error('err', error);
-            res.status(500).send('Internal Server Error');
+            res.render('error')
         }                   
     }
 
