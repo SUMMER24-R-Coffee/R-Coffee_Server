@@ -17,7 +17,17 @@ const authByRole = async (req, res, next) => {
   next();
 };
 
+const authClient = async (req, res, next) =>{
+  if(!req.sessionUser.client){
+    return res.status(401).json({ message: "Login to use this " });
+
+  }
+  next();
+
+}
+
 module.exports = {
   authCheck,
-  authByRole
-}
+  authByRole,
+  authClient
+};
