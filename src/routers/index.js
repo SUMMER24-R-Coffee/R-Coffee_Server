@@ -8,7 +8,8 @@ const employee=require('./manager/employee-router')
 // app
 const appBanner =require('./user/banner-router');
 const appCategory = require('./user/category-router');
-const appProduct = require('./user/product-router')
+const appProduct = require('./user/product-router');
+const appUser = require('./user/user-router')
 function route(app) {
   app.use('/', home)
   app.use('/',product)
@@ -21,6 +22,7 @@ function route(app) {
   app.use('/',appBanner)
   app.use('/',appCategory)
   app.use('/', appProduct)
+  app.use('/',appUser)
 
 };
 
