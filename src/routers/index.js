@@ -10,6 +10,7 @@ const appBanner =require('./user/banner-router');
 const appCategory = require('./user/category-router');
 const appProduct = require('./user/product-router');
 const appUser = require('./user/user-router')
+const appRating = require('./user/rating-router')
 function route(app) {
   app.use('/', home)
   app.use('/',product)
@@ -23,6 +24,7 @@ function route(app) {
   app.use('/',appCategory)
   app.use('/', appProduct)
   app.use('/',appUser)
+  app.use('/', appRating)
 
 };
 
