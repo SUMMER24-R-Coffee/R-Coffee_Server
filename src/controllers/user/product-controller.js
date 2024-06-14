@@ -5,7 +5,6 @@ class ProductController{
     //[GET]
     async getProducts (req,res){
         const email_user = req.params.email_user
-        console.log('Products - Email-user', email_user)
         try {
             const products = await ProductModel.getProducts(email_user); 
             res.send(products);

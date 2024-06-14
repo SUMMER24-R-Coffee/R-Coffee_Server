@@ -5,14 +5,14 @@ const getBasket = async (email_user)=>{
     FROM basket b 
     JOIN product p ON b.product_id = p.product_id 
     JOIN category c ON p.category_id = c.category_id
-    WHERE b.email_user =?`
+    WHERE b.email_user =? AND b.order_id IS NULL`
 
     return await connection.queryDatabase(query, [email_user])
 }
 
 const insertBasket = async(values)=>{
-    const query = `INSERT INTO basket (quantity, product_id, email_user, order_id)
-    VALUES (?, ?, ?, ?)`
+    const query = `INSERT INTO basket (quantity, product_id, email_user)
+    VALUES (?, ?, ?)`
 
     return await connection.queryDatabase(query, values)
 }
