@@ -5,22 +5,41 @@ class userController {
   async getLogin(req, res) {
     const email_user = req.body.email_user;
     const password = req.body.password;
+    console.log("Infor 🌶️🌶️🌶️🌶️", email_user);
 
     try {
       const result = await UserModel.getUser(email_user);
+      console.log("Infor😏😏😏😏", email_user);
+      console.log("Infor😏😏😏😏", password);
+
 
       if (result.length === 0) {
-        res.status(404).json({ message: "User does not exist" });
+        res.json({
+          status: "error",
+          message: "User does not exist" 
+        });
       } else {
-        if (password.compare(result[0].password)) {
-          res.status(202).json({ message: "Login successful" });
+        if (result[0].password===password) {
+          res.json({
+            status: "success",
+            message: "Login successful",
+            users: {
+              email_user: result[0].email_user,
+              gender: result[0].gender,
+              phone: result[0].phone,
+              user_img: result[0].user_img,
+              name: result[0].name,
+            }
+          });        
         } else {
-          res.status(401).json({ message: "Password is incorrect" });
+          res.json({
+            status: "error",
+            message: "Password is incorrect" });
         }
       }
     } catch (error) {
       console.log("Erorr login 🌶️🌶️🌶️🌶️", error);
-      res.status(500).json({ message: "Error" + error });
+      res.json({status: "error", message: "Error" + error });
     }
   }
   // [POST]
@@ -48,6 +67,19 @@ class userController {
     }
   }
 
+  //[GET]
+  async getUser(req, res){
+    const email_user=req.params.email_user;
+
+    try {
+      const result = await UserModel.getUser(email_user)
+
+      res.json({status:"success", users: result})
+    } catch (error) {
+      res.json({status:"error"})     
+    }
+
+  }
 
 }
 
