@@ -9,13 +9,54 @@ class basketController{
             const baskets = await BasketModel.getBasket(email_user); 
             res.send(baskets);
         } catch (error) {
-            console.error("Error fetching products:", error);
-            res.status(500).send({ error: "Failed to fetch products" });
+            console.error("Error fetching basket:", error);
+            res.send({status:"error", message:"Failed to fetch basket" });
         }
     }
     //[POST]
     async insertBasket(req, res){
-        
+        const email_user = req.body.email_user;
+        const quantity = req.body.quantity;
+        const product_id = req.body.product_id
+
+        try {
+            const insertValues=[quantity, product_id, email_user]
+            await BasketModel.insertBasket(insertValues)
+            res.send({status:"success", message:"Add to basket successfully" });
+
+        } catch (error) {
+            console.error("Error adding basket:", error);
+            res.send({status:"error", message:"Failed to add basket" });
+
+        }
+    }
+
+    async updateBasket(req, res){
+        const basket_id = req.params.basket_id
+        const quantity = req.body.quantity
+        try {
+            const updateValue=[quantity, basket_id]
+            await BasketModel.updateBasket(updateValue)
+            res.send({status:"success", message:"Update to basket successfully" });
+
+        } catch (error) {
+            console.error("Error Updateing basket:", error);
+            res.send({status:"error", message:"Failed to Update basket" });
+
+        }
+    }
+
+    async deleteBasket(req, res){
+        const basket_id = req.params.basket_id
+        try {
+            await BasketModel.deleteBasket(updateValue)
+            res.send({status:"success", message:"Delete to basket successfully" });
+
+        } catch (error) {
+            console.error("Error Deleting basket:", error);
+            res.send({status:"error", message:"Failed to Delete basket" });
+
+        }
     }
 
 }
