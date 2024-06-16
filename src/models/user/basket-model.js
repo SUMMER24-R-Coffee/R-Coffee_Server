@@ -29,7 +29,7 @@ const deleteBasket = async (basket_id) =>{
     return await connection.queryDatabase(query, [basket_id])
 }
 
-const addToBasket = async (quantity,product_id, email_user) => {
+const addToBasket = async (product_id, email_user) => {
     const checkQuery = `SELECT basket_id, quantity
                         FROM basket
                         WHERE product_id = ? AND email_user = ? AND order_id IS NULL`;
@@ -37,17 +37,36 @@ const addToBasket = async (quantity,product_id, email_user) => {
     const result = await connection.queryDatabase(checkQuery, [product_id, email_user]);
 
     if (result.length > 0) {
-        const { basket_id } = result[0];
-        await updateBasket([quantity, basket_id]);
+        const { basket_id, quantity } = result[0];
+        const newQuantity = quantity + 1;
+        await updateBasket([newQuantity, basket_id]);
     } else {
-        await insertBasket([quantity, product_id, email_user]);
+        await insertBasket([1, product_id, email_user]);
     }
 };
+
+const updateToBasket = async (quantity, product_id, email_user) => {
+    const checkQuery = `SELECT basket_id, quantity
+                        FROM basket
+                        WHERE product_id = ? AND email_user = ? AND order_id IS NULL`;
+
+    const result = await connection.queryDatabase(checkQuery, [product_id, email_user]);
+
+    if (result.length > 0) {
+        const { basket_id, quantity: currentQuantity } = result[0];
+        const newQuantity = currentQuantity + quantity;
+        await updateBasket([newQuantity, basket_id]);
+    } else {
+        await insertBasket([quantity, product_id, email_user]);
+    }    
+}
+
 
 module.exports={
     getBasket,
     insertBasket,
     updateBasket,
     deleteBasket,
-    addToBasket
+    addToBasket,
+    updateToBasket
 }
