@@ -59,5 +59,19 @@ class basketController{
         }
     }
 
+        //[POST]
+    async addToBasket(req, res) {
+        const { email_user, product_id } = req.body;
+        console.log("Email user, product id 🫰🫰🫰🫰", email_user+product_id)
+
+        try {
+            await BasketModel.addToBasket(product_id, email_user);
+            res.send({ status: "success", message: "Added to basket successfully" });
+        } catch (error) {
+            console.error("Error adding to basket:", error);
+            res.status(500).send({ status: "error", message: "Failed to add to basket" });
+        }
+    }
+
 }
 module.exports=new basketController();
