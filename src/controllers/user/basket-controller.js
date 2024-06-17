@@ -49,7 +49,7 @@ class basketController{
     async deleteBasket(req, res){
         const basket_id = req.params.basket_id
         try {
-            await BasketModel.deleteBasket(updateValue)
+            await BasketModel.deleteBasket(basket_id)
             res.send({status:"success", message:"Delete to basket successfully" });
 
         } catch (error) {
@@ -78,7 +78,6 @@ class basketController{
         const {quantity, email_user, product_id } = req.body;
         console.log("Email user, product id 🫰🫰🫰🫰", quantity+ email_user+ product_id)
         
-
         try {
             await BasketModel.updateToBasket(quantity, product_id, email_user);
             res.send({ status: "success", message: "Added to basket successfully" });

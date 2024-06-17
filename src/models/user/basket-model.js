@@ -24,7 +24,7 @@ const updateBasket = async(values)=>{
 }
 
 const deleteBasket = async (basket_id) =>{
-    const query = `DELETE basket WHERE basket_id= ?`
+    const query = "DELETE FROM basket WHERE basket_id= ?"
 
     return await connection.queryDatabase(query, [basket_id])
 }
