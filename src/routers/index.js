@@ -12,6 +12,11 @@ const appProduct = require('./user/product-router');
 const appUser = require('./user/user-router')
 const appRating = require('./user/rating-router')
 const appBasket = require('./user/basket-router')
+const appVoucher = require('./user/voucher-router');
+const appOrder = require('./user/order-router');
+const appAddress = require('./user/address-router');
+
+
 function route(app) {
   app.use('/', home)
   app.use('/',product)
@@ -27,6 +32,9 @@ function route(app) {
   app.use('/',appUser)
   app.use('/', appRating)
   app.use('/',appBasket)
+  app.use('/',appVoucher)
+  app.use('/',appOrder)
+  app.use('/',appAddress)
 
 };
 
