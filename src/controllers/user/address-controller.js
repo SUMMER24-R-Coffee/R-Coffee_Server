@@ -5,11 +5,11 @@ class BannerController {
     async getAddress(req, res) {
         const email_user = req.params.email_user
         try {
-            const banners = await AddressController.getAdress(email_user) 
-            res.send(banners);
+            const address = await AddressController.getAdress(email_user) 
+            res.send(address);
         } catch (error) {
-            console.error("Error fetching banners:", error);
-            res.status(500).send({ error: "Failed to fetch banners" });
+            console.error("Error fetching address:", error);
+            res.status(500).send({ error: "Failed to fetch address" });
         }
     }
 

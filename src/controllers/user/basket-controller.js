@@ -13,6 +13,18 @@ class basketController{
             res.send({status:"error", message:"Failed to fetch basket" });
         }
     }
+    //[GET]
+    async getBasketByOrd(req, res){
+        const order_id = req.params.order_id;
+        try {
+            const results = await BasketModel.getBasketByOrd(order_id)
+            res.send(results);
+        } catch (error) {
+            console.error("Error fetching basket:", error);
+            res.send({status:"error", message:"Failed to fetch basket" });            
+        }
+    }
+
     //[POST]
     async insertBasket(req, res){
         const email_user = req.body.email_user;
@@ -31,6 +43,7 @@ class basketController{
         }
     }
 
+    //[PUT]
     async updateBasket(req, res){
         const basket_id = req.params.basket_id
         const quantity = req.body.quantity

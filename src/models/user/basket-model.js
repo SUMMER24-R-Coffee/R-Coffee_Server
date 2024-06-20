@@ -10,6 +10,17 @@ const getBasket = async (email_user)=>{
     return await connection.queryDatabase(query, [email_user])
 }
 
+const getBasketByOrd = async (order_id) =>{
+    const query = `SELECT c.name as category_name, p.name, p.img, p.price, b.*
+    FROM basket b 
+    JOIN product p ON b.product_id = p.product_id 
+    JOIN category c ON p.category_id = c.category_id
+    WHERE b.order_id =?`
+
+    return await connection.queryDatabase(query, [order_id])    
+
+}
+
 const insertBasket = async(values)=>{
     const query = `INSERT INTO basket (quantity, product_id, email_user)
     VALUES (?, ?, ?)`
@@ -75,6 +86,7 @@ const updateOrderIdBasket = async (order_id, basket_ids) => {
 
 module.exports={
     getBasket,
+    getBasketByOrd,
     insertBasket,
     updateBasket,
     deleteBasket,

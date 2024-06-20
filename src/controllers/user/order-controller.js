@@ -1,6 +1,5 @@
 const OrderModel = require('../../models/user/order-model');
 const BasketModel = require('../../models/user/basket-model');
-const { con } = require('../../config/connection');
 
 class OrderController {
     // [POST]
@@ -15,7 +14,6 @@ class OrderController {
             order_message,
             basket_id 
         } = req.body;
-        console.log("Basket ids 😬😬😬", order_id);
         try {
             if (!Array.isArray(basket_id) || basket_id.length === 0) {
                 throw new Error('Basket IDs must be provided as a non-empty array.');
@@ -52,6 +50,40 @@ class OrderController {
             console.error("Error creating order:", error);
         }
     }
+    //[GET]
+    async getOrder(req, res) {
+        const email_user = req.params.email_user;
+        
+        console.log("Email:", email_user);
+
+        try {
+            const results = await OrderModel.getOrders(email_user);
+            res.send(results);
+        } catch (error) {
+            res.send({ status: "error", message: "Failed to get orders" });
+            console.error("Error getting orders:", error);
+        }
+    }
+    //[PUT]
+    async updateStatusOrder(req, res) {
+        const {
+            status_order,
+            order_id
+        } = req.body
+        try {
+            const updateValues=[status_order,order_id]
+            console.log("Order staus", updateValues)
+            await OrderModel.updateStatusOrder(updateValues);
+            
+        } catch (error) {
+            res.send({ status: "error", message: "Failed update status orders" });            
+            console.error("Error creating order:", error);
+        }
+
+    }
+
+        
+    
 }
 
 module.exports = new OrderController();
