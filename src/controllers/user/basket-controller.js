@@ -86,6 +86,23 @@ class basketController{
             res.status(500).send({ status: "error", message: "Failed to add to basket" });
         }
     }    
+    // [PUT]
+    async updateOrderIDBasket(req, res) {
+        const { order_id, basket_id } = req.body;
+
+        if (!Array.isArray(basket_id)) {
+            return res.status(400).send({ status: "error", message: "basket_ids must be an array" });
+        }
+        console.log("Request Update", order_id +basket_id)
+
+        try {
+            await BasketModel.updateOrderIdBasket(order_id, basket_id);
+            res.send({ status: "success", message: "Updated order ID for baskets successfully" });
+        } catch (error) {
+            console.error("Error updating order ID for baskets:", error);
+            res.status(500).send({ status: "error", message: "Failed to update order ID for baskets" });
+        }
+    }
 
 }
 module.exports=new basketController();

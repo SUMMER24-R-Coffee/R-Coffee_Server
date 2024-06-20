@@ -8,5 +8,6 @@ router.put('/api-app/update-basket/:basket_id', basketController.updateBasket)
 router.delete('/api-app/delete-basket/:basket_id', basketController.deleteBasket)
 router.post('/api-app/add-to-basket', basketController.addToBasket);
 router.post('/api-app/update-to-basket', basketController.updateToBasket)
+router.put('/api-app/update-order-id-basket', basketController.updateOrderIDBasket);
 
 module.exports= router

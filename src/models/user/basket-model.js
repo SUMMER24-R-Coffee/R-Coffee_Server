@@ -61,6 +61,17 @@ const updateToBasket = async (quantity, product_id, email_user) => {
     }    
 }
 
+const updateOrderIdBasket = async (order_id, basket_ids) => {
+    if (!Array.isArray(basket_ids) || basket_ids.length === 0) {
+        throw new Error('Basket IDs must be provided as a non-empty array.');
+    }
+
+    const placeholders = basket_ids.map(() => '?').join(', ');
+    const query = `UPDATE basket SET order_id = ? WHERE basket_id IN (${placeholders})`;
+    
+    const values = [order_id, ...basket_ids];
+    return await connection.queryDatabase(query, values);
+};
 
 module.exports={
     getBasket,
@@ -68,5 +79,6 @@ module.exports={
     updateBasket,
     deleteBasket,
     addToBasket,
-    updateToBasket
+    updateToBasket,
+    updateOrderIdBasket
 }

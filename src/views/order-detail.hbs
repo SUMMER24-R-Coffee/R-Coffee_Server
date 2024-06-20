@@ -146,7 +146,11 @@
                                     </div>
                                     <div class="col ">
                                         <p class="text-right-align">{{payment_method}}</p>
+                                        {{#if voucher_code}}
                                         <p class="text-right-align">{{voucher_code}}</p>
+                                        {{else}}
+                                        <p class="text-right-align">None</p>
+                                        {{/if}}
                                         <p class="text-right-align">{{total_quantity}} (items)</p>
                                         <p class="text-right-align">{{formatCurrency totalWithDiscount 'vnd'}}  đ</p>
                                         <p class="text-right-align">{{formatCurrency discount_amount 'vnd'}} đ</p>

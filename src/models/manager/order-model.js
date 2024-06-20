@@ -7,12 +7,15 @@ const getOrders = async ()=>{
 }
 
 const getOder = async (order_id) =>{
-    const query = 'SELECT DISTINCT  o.*, b.*, a.location, v.voucher_code, u.phone, u.name, sum(b.quantity) as total_quantity FROM `order` o '+
-    'JOIN basket b ON o.order_id = b.order_id '+
-    'JOIN address a ON a.address_id = o.address_id '+
-    'JOIN voucher v ON v.voucher_id = o.voucher_id '+
-    'JOIN users u ON u.email_user = a.email_user '+
-   ' WHERE o.order_id= ? GROUP BY o.order_id';
+    const query = `SELECT DISTINCT o.*, b.*, a.location, v.voucher_code, u.phone, u.name, SUM(b.quantity) AS total_quantity 
+    FROM \`order\` o 
+    JOIN basket b ON o.order_id = b.order_id 
+    JOIN address a ON a.address_id = o.address_id 
+    LEFT JOIN voucher v ON v.voucher_id = o.voucher_id 
+    JOIN users u ON u.email_user = a.email_user 
+    WHERE o.order_id = ?
+    AND (v.voucher_id IS NOT NULL OR v.voucher_id IS NULL)
+    GROUP BY o.order_id`;
     
     return await connection.queryDatabase(query,[order_id])
 }
