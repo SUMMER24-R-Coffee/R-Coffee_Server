@@ -15,6 +15,7 @@ const appBasket = require('./user/basket-router')
 const appVoucher = require('./user/voucher-router');
 const appOrder = require('./user/order-router');
 const appAddress = require('./user/address-router');
+const appPayment = require('./user/payment-detail-router')
 
 
 function route(app) {
@@ -35,6 +36,7 @@ function route(app) {
   app.use('/',appVoucher)
   app.use('/',appOrder)
   app.use('/',appAddress)
+  app.use('/', appPayment)
 
 };
 

@@ -15,7 +15,7 @@ class OrderController {
             order_message,
             basket_id 
         } = req.body;
-        console.log("Basket ids 😬😬😬", basket_id);
+        console.log("Basket ids 😬😬😬", order_id);
         try {
             if (!Array.isArray(basket_id) || basket_id.length === 0) {
                 throw new Error('Basket IDs must be provided as a non-empty array.');
