@@ -17,5 +17,17 @@ class paymentDetailController{
         }
     }
 
+    async updatePaymentDetail(req, res){
+        const order_id = req.params.order_id
+        const status = req.body.status
+        try {
+            const updateValue = [status, order_id]
+            await PaymenModel.updatePaymentDetail(updateValue)
+            console.log(" update payment detai successful");
+        } catch (error) {
+            
+        }
+    }
+
 }
 module.exports= new paymentDetailController()

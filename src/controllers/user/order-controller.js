@@ -66,15 +66,18 @@ class OrderController {
     }
     //[PUT]
     async updateStatusOrder(req, res) {
-        const {
-            status_order,
-            order_id
-        } = req.body
+        const order_id= req.params.order_id
+        const status_order = req.body.status_order
         try {
-            const updateValues=[status_order,order_id]
+            const updateValues=[status_order, order_id]
             console.log("Order staus", updateValues)
-            await OrderModel.updateStatusOrder(updateValues);
-            
+           const result= await OrderModel.updateStatusOrder(updateValues);
+                
+           if (result.affectedRows > 0) {
+                res.status(200).json({ status: "success", message: "Order status updated successfully" });
+            } else {
+                res.status(404).json({ status: "error", message: "Order not found or status not updated" });
+            }
         } catch (error) {
             res.send({ status: "error", message: "Failed update status orders" });            
             console.error("Error creating order:", error);

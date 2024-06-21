@@ -11,6 +11,7 @@ const getOrderByEmail = async (email_user) =>{
         o.payment_method,
         o.order_message,
         b.quantity,
+        SUM(b.quantity) as total_item,
         p.name,
         p.img,
         p.price ,
