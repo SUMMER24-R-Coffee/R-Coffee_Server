@@ -26,7 +26,7 @@ const getOrderByEmail = async (email_user) =>{
     JOIN payment_detail pt ON o.order_id = pt.order_id
     LEFT JOIN cancel c ON o.order_id = c.order_id
     WHERE b.email_user = ?
-    GROUP BY o.order_id DESC
+    GROUP BY o.order_id ORDER BY o.update_at DESC
 `;
 
     return await connection.queryDatabase(query, [email_user]);
@@ -40,7 +40,7 @@ const insertOrder = async (values) => {
 }
 
 const updateStatusOrder = async(values) =>{
-    const query = `UPDATE \`order\` SET status_order =?  WHERE order_id =?`;
+    const query = `UPDATE \`order\` SET status_order =?, update_at = NOW()   WHERE order_id =?`;
 
     return await connection.queryDatabase(query, values)
 }
