@@ -68,9 +68,12 @@ class OrderController {
     async updateStatusOrder(req, res) {
         const order_id= req.params.order_id
         const status_order = req.body.status_order
+        const reason = req.body.reason
+        console.log("Reason ", reason)
+
         try {
             const updateValues=[status_order, order_id]
-            console.log("Order staus", updateValues)
+            console.log("Order staus", updateValues+reason)
            const result= await OrderModel.updateStatusOrder(updateValues);
                 
            if (result.affectedRows > 0) {
