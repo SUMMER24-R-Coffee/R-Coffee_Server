@@ -24,14 +24,15 @@ class paymentDetailController{
             const updateValue = [status, order_id]
             const result = await PaymenModel.updatePaymentDetail(updateValue)
             if (result.affectedRows > 0) {
-                res.status(200).send({status:"success", message:"Success" });
+                console.log("Payment detail","Success")
+                res.status(203).send({status:"success", message:"Success" });
             }else{
-                res.status(404).send({status:"error", message:"Failed" });
+                res.status(405).send({status:"error", message:"Failed" });
+                console.log("Payment detailERRORR","ERRORR")
 
             }            
-            console.log(" update payment detai successful");
         } catch (error) {
-            
+            console.error("Error repay", error)
         }
     }
 

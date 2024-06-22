@@ -69,24 +69,18 @@
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'preparing')">Preparing</a>
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'pick up')">Ready For Pickup</a>
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
-                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'cancelled')">Cancelled</a>
                                             {{/if}}
 
                                             {{#if (eq status_order 'preparing')}}
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'pick up')">Ready For Pickup</a>
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
-                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
                                             {{/if}}
 
                                             {{#if (eq status_order 'pick up')}}
                                                 <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivering')">Delivering</a>
-                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
                                             {{/if}}
 
-                                            {{#if (eq status_order 'delivering')}}
-                                                <a class="dropdown-item" href="#" onclick="submitStatusForm('{{order_id}}', 'delivered')">Delivered</a>
-                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
@@ -114,6 +108,10 @@
                                             <span class="icon"> <i class="mdi mdi-motorbike"></i> </span>
                                             <h6 class="mt-2">Delivering</h6>
                                         </div>
+                                         <div class="step {{#if (eq status_order 'delivered')}}active{{/if}}">
+                                            <span class="icon"> <i class="mdi mdi-package-variant-closed"></i> </span>
+                                            <h6 class="mt-2">Delivered</h6>
+                                        </div>                                        
                                     {{/if}}
                                 </div>
                                 {{/each}}

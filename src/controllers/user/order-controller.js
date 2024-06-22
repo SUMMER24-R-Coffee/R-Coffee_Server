@@ -1,5 +1,7 @@
 const OrderModel = require('../../models/user/order-model');
 const BasketModel = require('../../models/user/basket-model');
+const PaymenModel = require('../../models/user/payment-detail_model')
+const CancelModel =require('../../models/user/cancel-model')
 
 class OrderController {
     // [POST]
@@ -69,7 +71,7 @@ class OrderController {
         const order_id= req.params.order_id
         const status_order = req.body.status_order
         const reason = req.body.reason
-        console.log("Reason ", reason)
+        console.log("Reason 🌶️🌶️🌶️🌶️🌶️", reason)
 
         try {
             const updateValues=[status_order, order_id]
@@ -77,7 +79,11 @@ class OrderController {
            const result= await OrderModel.updateStatusOrder(updateValues);
                 
            if (result.affectedRows > 0) {
-                res.status(200).json({ status: "success", message: "Order status updated successfully" });
+            if (reason !== undefined && reason !== "") {
+                const cancelInsertValues = [reason, order_id];
+                await CancelModel.insertCancel(cancelInsertValues);
+            }            
+                res.status(200).json({ status: "success", message: "Order status updated successfully" });                
             } else {
                 res.status(404).json({ status: "error", message: "Order not found or status not updated" });
             }

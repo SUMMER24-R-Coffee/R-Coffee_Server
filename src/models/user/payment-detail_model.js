@@ -8,8 +8,8 @@ const insertPaymentDetail = async (values) => {
 }
 
 const updatePaymentDetail = async (values) => {
-    const query = `UPDATE payment_detail SET status = ?, updated_at = NOW()  WHERE order_id =?`;
-    return await connection.query(query, values);
+    const query = `UPDATE payment_detail SET status = ? WHERE order_id =?`;
+    return await connection.queryDatabase(query, values);
 };
 module.exports = {
     insertPaymentDetail,
