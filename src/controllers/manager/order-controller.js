@@ -112,11 +112,6 @@ class orderController{
                 default:
                     throw new Error('Invalid status_order value');
             }
-            console.log('Email user 🙄🙄🙄🙄🙄🙄🙄', email_user)
-            console.log('Token user 🌶️🌶️🌶️🌶️🌶️', token)
-            console.log('Order ID 🌶️🌶️🌶️🌶️🌶️', order_id)
-            console.log("Status", status_order)
-            console.log("Reason", reason)
 
     
             await OrderModel.updateStatus(updateValues);
