@@ -17,6 +17,7 @@ const appOrder = require('./user/order-router');
 const appAddress = require('./user/address-router');
 const appPayment = require('./user/payment-detail-router');
 const appFav = require('./user/favorite-router')
+const appNoti =require('./user/notification-router')
 
 
 function route(app) {
@@ -39,6 +40,7 @@ function route(app) {
   app.use('/',appAddress)
   app.use('/', appPayment)
   app.use('/',appFav)
+  app.use('/',appNoti)
 
 };
 

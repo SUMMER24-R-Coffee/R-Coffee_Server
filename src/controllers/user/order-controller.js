@@ -1,7 +1,9 @@
 const OrderModel = require('../../models/user/order-model');
 const BasketModel = require('../../models/user/basket-model');
-const PaymenModel = require('../../models/user/payment-detail_model')
 const CancelModel =require('../../models/user/cancel-model')
+const NotificationModel = require("../../models/user/notification-model");
+const sendNotification = require("../../utils/sendNotification");
+const { formatCurrency } = require("../../utils/formatCurrency"); 
 
 class OrderController {
     // [POST]
@@ -14,8 +16,12 @@ class OrderController {
             address_id,
             voucher_id,
             order_message,
-            basket_id 
+            basket_id,
+            email_user,
+            token
         } = req.body;
+        console.log("EMAIL ORDER!====😜🌶️😜🙄🤣😏:", email_user+token);
+
         try {
             if (!Array.isArray(basket_id) || basket_id.length === 0) {
                 throw new Error('Basket IDs must be provided as a non-empty array.');
@@ -30,16 +36,24 @@ class OrderController {
                 voucher_id,
                 order_message
             ];
+            const formattedTotalAmount = formatCurrency(total_amount);
 
+
+            const title = "Order Created";
+            const message = `Order: ${order_id}: ${formattedTotalAmount} has been created`;
 
             const orderInsertResult = await OrderModel.insertOrder(insertValues);
+
             
             if (orderInsertResult.affectedRows > 0) {
                 const basketUpdateResult = await BasketModel.updateOrderIdBasket(order_id, basket_id);
-                
+                await NotificationModel.saveNotification(title, message, email_user, order_id);
+                await sendNotification(token, title, message); 
+    
                 if (basketUpdateResult.affectedRows > 0) {
                     res.send({ status: "success", message: "Order created successfully" });
                 } else {
+                 
                     await OrderModel.deleteOrder(order_id);
                     res.send({ status: "error", message: "Order created but failed to update basket" });
                 }
@@ -69,8 +83,14 @@ class OrderController {
     //[PUT]
     async updateStatusOrder(req, res) {
         const order_id= req.params.order_id
-        const status_order = req.body.status_order
-        const reason = req.body.reason
+
+        const {
+            status_order,
+            reason,
+            email_user,
+            token
+        } = req.body;       
+
         console.log("Reason 🌶️🌶️🌶️🌶️🌶️", reason)
 
         try {
@@ -79,8 +99,20 @@ class OrderController {
            const result= await OrderModel.updateStatusOrder(updateValues);
                 
            if (result.affectedRows > 0) {
+            if(status_order=="delivered"){
+                const title = "Order Receiveds";
+                const message = `Order: ${order_id}: has been completed`;
+                
+                await NotificationModel.saveNotification(title, message, email_user, order_id);
+                await sendNotification(token, title, message);                
+            }
             if (reason !== undefined && reason !== "") {
                 const cancelInsertValues = [reason, order_id];
+                const title = "Order Cancelled";
+                const message = `Order: ${order_id}: has been cancelled for reason: ${reason}`;
+
+                await NotificationModel.saveNotification(title, message, email_user, order_id);
+                await sendNotification(token, title, message);
                 await CancelModel.insertCancel(cancelInsertValues);
             }            
                 res.status(200).json({ status: "success", message: "Order status updated successfully" });                
