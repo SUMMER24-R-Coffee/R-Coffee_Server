@@ -14,9 +14,9 @@ class userController {
 
 
       if (result.length === 0) {
-        res.json({
-          status: "error",
-          message: "User does not exist" 
+          res.json({
+            status: "error",
+            message: "User does not exist" 
         });
       } else {
         if (result[0].password===password) {
@@ -79,6 +79,25 @@ class userController {
       res.json({status:"error"})     
     }
 
+  }
+  //[PUT]
+  async updateTokenUser(req, res){
+    const email_user=req.params.email_user;
+    const token = req.body.token
+
+    try {
+      const result = await UserModel.updateTokenUser(token, email_user)
+      if (result.affectedRows > 0) {
+        console.log("Update User Token","Success")
+        res.status(202).send({status:"success", message:"Success" });      
+      }else{
+        console.log("Update User Token","Failed")
+        res.status(404).send({status:"error", message:"Failed" });      
+
+      }
+    } catch (error) {
+      console.error("Error update token user",error)
+    }
   }
 
 }

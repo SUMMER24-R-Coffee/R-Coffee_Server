@@ -13,9 +13,16 @@ const getUser = async(email_user) =>{
 }
 
 const insertUser = async(values)=>{
-    const query ='INSERT INTO `users` (email_user, password) VALUES (?, ?)'
+    const query ='INSERT INTO `users` (email_user, password, token) VALUES (?, ?, ?)'
 
     return await connection.queryDatabase(query, values)
+}
+
+const updateTokenUser = async(token, email_user)=>{
+    const query = `UPDATE users SET token = ? WHERE email_user =?`;
+    const values =[token, email_user]
+
+    return await connection.queryDatabase(query,values)
 }
 
 const updateUser = async (values) => {
@@ -41,5 +48,6 @@ module.exports={
     getUser,
     insertUser,
     updateUser,
-    updatePassword
+    updatePassword,
+    updateTokenUser
 }

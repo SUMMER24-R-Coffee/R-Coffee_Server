@@ -7,7 +7,7 @@ const getOrders = async ()=>{
 }
 
 const getOder = async (order_id) =>{
-    const query = `SELECT DISTINCT o.*, b.*, a.location, v.voucher_code, u.phone, u.name, SUM(b.quantity) AS total_quantity 
+    const query = `SELECT DISTINCT o.*, b.*, a.location, v.voucher_code, u.phone, u.name, u.email_user,u.token, SUM(b.quantity) AS total_quantity 
     FROM \`order\` o 
     JOIN basket b ON o.order_id = b.order_id 
     JOIN address a ON a.address_id = o.address_id 
@@ -21,7 +21,7 @@ const getOder = async (order_id) =>{
 }
 
 const updateStatus = async(values)=>{
-    const query = 'UPDATE `order` SET status_order =? WHERE order_id = ?';
+    const query = 'UPDATE `order` SET status_order =?,update_at = NOW() WHERE order_id = ?';
 
     return await connection.queryDatabase(query,values)
 }
