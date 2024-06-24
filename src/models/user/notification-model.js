@@ -16,8 +16,14 @@ const markNotificationAsRead = async (notification_id) => {
     return await connection.queryDatabase(query, [notification_id]);
 };
 
+const deleteNotification = async (notification_id ) =>{
+    const query = `DELETE FROM  notification WHERE notification_id =?`;
+    return await connection.queryDatabase(query,[notification_id]);
+} 
+
 module.exports = {
     saveNotification,
     getNotificationsByEmail,
-    markNotificationAsRead
+    markNotificationAsRead,
+    deleteNotification
 };
