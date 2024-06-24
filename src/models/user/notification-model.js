@@ -21,9 +21,15 @@ const deleteNotification = async (notification_id ) =>{
     return await connection.queryDatabase(query,[notification_id]);
 } 
 
+const countNumberUnRead = async(email_user) =>{
+    const query =`SELECT COUNT(notification_id) as total_remain FROM notification  WHERE is_read = 0  AND email_user = ?`;
+    return await connection.queryDatabase(query,[email_user])
+}
+
 module.exports = {
     saveNotification,
     getNotificationsByEmail,
     markNotificationAsRead,
-    deleteNotification
+    deleteNotification,
+    countNumberUnRead
 };

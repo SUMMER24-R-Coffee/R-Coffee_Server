@@ -33,6 +33,18 @@ class notificationController{
             res.status(505).send('Server error');
         }
     }
+
+    async countUnreadNotification(req, res){
+        const {email_user}=req.params
+        try {
+            const result = await NotificationModel.countNumberUnRead(email_user);
+            res.status(202).send(result);
+        } catch (err) {
+            console.error('Error count notification:', err);
+            res.status(505).send('Server error');
+        }
+
+    }
     
 
 }
