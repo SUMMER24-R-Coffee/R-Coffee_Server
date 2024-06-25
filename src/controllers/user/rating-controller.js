@@ -15,13 +15,28 @@ class ratingController{
             
         }
     }
-    //[INSERT]
-    async insertRating(req, res){
-        const [rating, review, product_id, email_user]= req.body;
+    //[GET]
+
+    async getRatingsByBasketIds(req, res) {
+        const basketIds = req.query.basket_ids.split(',').map(Number);
+
         try {
-            const insertValues =[rating, review, product_id, email_user]
+            const results = await RatingModel.getRatingsByBasketIds(basketIds);
+            console.log('Query results:', results); 
+            res.send(results);
+        } catch (error) {
+            res.status(404).json({ message: "Error: " + error });
+            console.log('Error getting reviews', error);
+        }
+    }
+    //[POST]
+    async insertRating(req, res){
+        const {rating, review, product_id, basket_id, email_user}= req.body;
+        
+        try {
+            const insertValues =[rating, review,product_id, basket_id, email_user]
             await RatingModel.insertRating(insertValues);
-            res.status(200).json({ message: "Success" +error });
+            res.status(200).json({ message: "Success" });
         } catch (error) {
             res.status(500).json({ message: "Error"+error });
             console.log('Error get reviews', error)
