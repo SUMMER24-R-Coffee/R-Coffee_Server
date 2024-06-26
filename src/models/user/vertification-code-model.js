@@ -1,7 +1,7 @@
-const connection = require('../config/connection');
+const connection = require('../../config/connection');
 
 const storeCode = async (email_user, code) => {
-    const expiration = Date.now() + 5 * 60 * 1000; // 5 minutes expiration
+    const expiration = Date.now() + 5 * 60 * 1000;
     const query = 'INSERT INTO verification_codes (email_user, code, expiration) VALUES (?, ?, ?)';
     await connection.queryDatabase(query, [email_user, code, expiration]);
 };

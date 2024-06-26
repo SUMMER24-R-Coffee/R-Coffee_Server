@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
-const VerificationCode = require('../../models/user/vertification-code-model');
-const User = require('../../models/user/user-model');
+const VerificationCode = require("../../models/user/vertification-code-model");
+const User = require("../../models/user/user-model");
 const bcrypt = require('bcrypt');
 require('dotenv').config(); 
 

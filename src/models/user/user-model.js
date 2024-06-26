@@ -1,4 +1,4 @@
-const connection = require('../config/connection'); // Ensure the path is correct
+const connection = require("../../config/connection"); 
 
 const checkUser = async (email_user) => {
     const query = `SELECT COUNT(*) as count FROM users WHERE email_user=?`;
