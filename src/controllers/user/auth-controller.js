@@ -14,13 +14,23 @@ class AuthController {
                 pass: process.env.EMAIL_PASS 
             }
         });
+        this.requestCode = this.requestCode.bind(this);
+        this.register = this.register.bind(this);        
     }
 
     async requestCode(req, res) {
         const email_user = req.body.email_user;
-        const verificationCode = crypto.randomBytes(3).toString('hex').toUpperCase();
+        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString(); 
 
         try {
+            const users = await User.checkUser(email_user);
+            const userCount = users[0].count; 
+
+
+            if (userCount > 0) {
+                return res.send({ status: "error", message: "Email already exists." });
+            }
+
             await VerificationCode.storeCode(email_user, verificationCode);
 
             const mailOptions = {
@@ -32,33 +42,34 @@ class AuthController {
 
             await this.transporter.sendMail(mailOptions);
 
-            res.status(200).send('Verification code sent to email.');
+            res.status(200).json({status:"success", message: 'Verification code sent to email.' });
         } catch (error) {
-            res.status(500).send('Error sending email: ' + error.message);
+
+            res.status(500).json({status:"error", message: 'Error sending email: ' + error.message });
         }
     }
 
     async register(req, res) {
-        const { email_user, password, code } = req.body;
+        const { email_user, password, code, token} = req.body;
 
         try {
             const isValidCode = await VerificationCode.verifyCode(email_user, code);
             if (!isValidCode) {
-                return res.status(400).send('Invalid or expired verification code.');
+                return res.status(400).json({ status: "error", message: 'Invalid or expired verification code.' });
             }
 
             const userExists = await User.checkUser(email_user);
             if (userExists.count > 0) {
-                return res.status(400).send('User already exists.');
+                return res.status(400).json({ status: "error", message: 'User already exists.' });
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10);
-            await User.insertUser([email_user, hashedPassword, null]);
+            // const hashedPassword = await bcrypt.hash(password, 10);
+            await User.insertUser([email_user, password, token]);
             await VerificationCode.deleteCode(email_user);
 
-            res.status(200).send('User registered successfully.');
+            return res.status(200).json({ status: "success", message: 'User registered successfully.' });
         } catch (error) {
-            res.status(500).send('Error registering user: ' + error.message);
+            return res.status(500).json({ status: "error", message: 'Error registering user: ' + error.message });
         }
     }
 }
