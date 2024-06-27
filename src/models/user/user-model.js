@@ -11,7 +11,7 @@ const getUser = async (email_user) => {
 };
 
 const insertUser = async (values) => {
-    const query = 'INSERT INTO `users` (email_user, password, token) VALUES (?, ?, ?)';
+    const query = 'INSERT INTO `users` (email_user, password) VALUES (?, ?)';
     return await connection.queryDatabase(query, values);
 };
 

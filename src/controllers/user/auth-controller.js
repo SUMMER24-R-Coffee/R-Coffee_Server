@@ -58,13 +58,7 @@ class AuthController {
                 return res.status(400).json({ status: "error", message: 'Invalid or expired verification code.' });
             }
 
-            const userExists = await User.checkUser(email_user);
-            if (userExists.count > 0) {
-                return res.status(400).json({ status: "error", message: 'User already exists.' });
-            }
-
-            // const hashedPassword = await bcrypt.hash(password, 10);
-            await User.insertUser([email_user, password, token]);
+            await User.insertUser([email_user, password]);
             await VerificationCode.deleteCode(email_user);
 
             return res.status(200).json({ status: "success", message: 'User registered successfully.' });
