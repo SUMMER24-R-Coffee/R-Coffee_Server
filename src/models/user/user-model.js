@@ -22,11 +22,11 @@ const updateTokenUser = async (token, email_user) => {
 };
 
 const updateUser = async (values) => {
-    let query = `UPDATE users SET password = ?, name = ?, gender = ?, phone = ? `;
-    const queryParams = [values.password, values.name, values.gender, values.phone, values.email_user];
+    let query = `UPDATE users SET name = ?, gender = ?, phone = ? `;
+    const queryParams = [values.name, values.gender, values.phone, values.email_user];
 
     if (values.user_img) {
-        query = `UPDATE users SET password = ?, user_img = ?, name = ?, gender = ?, phone = ? `;
+        query = `UPDATE users SET user_img = ?, name = ?, gender = ?, phone = ? `;
         queryParams.splice(1, 0, values.user_img);
     }
 
