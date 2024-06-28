@@ -4,6 +4,7 @@ const banner=require('./manager/banner-router')
 const voucher=require('./manager/voucher-router')
 const order=require('./manager/order-router')
 const employee=require('./manager/employee-router')
+const category = require("./manager/category-router")
 
 // app
 const appBanner =require('./user/banner-router');
@@ -27,6 +28,7 @@ function route(app) {
   app.use('/',voucher)
   app.use('/',order)
   app.use('/',employee)
+  app.use('/', category)
 
   // app
   app.use('/',appBanner)

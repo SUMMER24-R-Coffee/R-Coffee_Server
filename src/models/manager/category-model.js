@@ -14,12 +14,7 @@ const insertCategory = async (name) => {
 
 const updateCategory = async (values) => {
     const query = 'UPDATE category SET name = ? WHERE category_id = ?';
-    const updateValues = [
-        values.name,
-        values.Category_id
-    ];
-
-    return await connection.queryDatabase(query, updateValues);
+    return await connection.queryDatabase(query, values);
 
 }
 const checkCategory = async (category_id) =>{
