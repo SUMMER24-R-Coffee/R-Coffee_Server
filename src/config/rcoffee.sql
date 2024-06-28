@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 10:25 AM
+-- Generation Time: Jun 28, 2024 at 12:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -51,7 +51,10 @@ INSERT INTO `address` (`address_id`, `location`, `email_user`) VALUES
 (11, '234 Ngũ Hành Sơn, Đà Nẵng', 'jane.smith@example.com'),
 (12, '76 Hải Châu 1, Đà Nẵng', 'jane.smith@example.com'),
 (13, '116 Sơn Trà, Đà Nẵng', 'jane.smith@example.com'),
-(14, '452 Tần Lan, Đồ Sơn', 'david.wilson@example.com');
+(14, '452 Tần Lan, Đồ Sơn', 'david.wilson@example.com'),
+(15, '123 Sơn Trang Vương Quyền', 'datlo2208@gmail.com '),
+(16, '998 Hoàng Sa', 'datlo2208@gmail.com '),
+(17, '116 Nguyễn Thị Thập ', 'datlowashere@gmail.com ');
 
 -- --------------------------------------------------------
 
@@ -202,14 +205,26 @@ INSERT INTO `basket` (`basket_id`, `quantity`, `product_id`, `email_user`, `orde
 (166, 1, 2, 'jane.smith@example.com', 'ORD240624203017'),
 (167, 1, 2, 'jane.smith@example.com', 'ORD240626040444'),
 (168, 3, 4, 'jane.smith@example.com', 'ORD240626040444'),
-(169, 2, 1, 'david.wilson@example.com', NULL),
+(169, 2, 1, 'david.wilson@example.com', 'ORD240627163232'),
 (171, 1, 8, 'david.wilson@example.com', 'ORD240626033200'),
 (172, 2, 10, 'david.wilson@example.com', 'ORD240626033200'),
 (173, 3, 11, 'david.wilson@example.com', 'ORD240626033200'),
 (174, 1, 2, 'david.wilson@example.com', 'ORD240626034514'),
 (175, 1, 10, 'david.wilson@example.com', 'ORD240626034514'),
 (176, 1, 6, 'david.wilson@example.com', 'ORD240626034514'),
-(177, 1, 2, 'david.wilson@example.com', 'ORD240626152307');
+(177, 1, 2, 'david.wilson@example.com', 'ORD240626152307'),
+(178, 3, 4, 'david.wilson@example.com', 'ORD240627163232'),
+(180, 2, 1, 'david.wilson@example.com', 'ORD240627163457'),
+(181, 1, 2, 'david.wilson@example.com', 'ORD240627163457'),
+(183, 3, 1, 'datlo2208@gmail.com ', 'ORD240627215136'),
+(184, 1, 1, 'david.wilson@example.com', NULL),
+(185, 1, 9, 'david.wilson@example.com', 'ORD240628134501'),
+(186, 3, 10, 'david.wilson@example.com', NULL),
+(187, 1, 1, 'datlo2208@gmail.com ', NULL),
+(188, 4, 2, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(189, 21, 1, 'datlowashere@gmail.com ', 'ORD240628162038'),
+(190, 1, 2, 'datlowashere@gmail.com ', 'ORD240628162222'),
+(191, 2, 1, 'datlowashere@gmail.com ', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,7 +280,10 @@ INSERT INTO `cancel` (`cancel_id`, `reason`, `create_at`, `order_id`) VALUES
 (35, 'Wrong Order Details', '2024-06-24 23:10:07', 'ORD240624230859'),
 (36, 'Change of Plans', '2024-06-24 23:10:58', 'ORD240623161423'),
 (37, 'Your request payment too long so we decided to cancel your order. regrets!', '2024-06-24 23:11:59', 'ORD240623220033'),
-(38, 'Price Too High', '2024-06-26 15:23:46', 'ORD240626152307');
+(38, 'Price Too High', '2024-06-26 15:23:46', 'ORD240626152307'),
+(39, 'Wrong Order Details', '2024-06-27 21:53:10', 'ORD240627215136'),
+(40, 'Wrong Order Details', '2024-06-28 13:45:35', 'ORD240628134501'),
+(41, 'Delay in Delivery', '2024-06-28 16:22:56', 'ORD240628162222');
 
 -- --------------------------------------------------------
 
@@ -287,7 +305,8 @@ INSERT INTO `category` (`category_id`, `name`) VALUES
 (2, 'Latte'),
 (3, 'Cappuccino'),
 (4, 'Americano'),
-(5, 'Mocha');
+(5, 'Mocha'),
+(6, 'Black Origin');
 
 -- --------------------------------------------------------
 
@@ -344,10 +363,12 @@ INSERT INTO `favorite` (`favorite_id`, `create_at`, `user_id`, `product_id`) VAL
 (4, '2024-05-25 11:44:54', 'john.doe@example.com', 4),
 (94, '2024-06-24 20:26:28', 'jane.smith@example.com', 13),
 (95, '2024-06-24 20:26:29', 'jane.smith@example.com', 14),
-(96, '2024-06-24 23:12:28', 'david.wilson@example.com', 1),
-(101, '2024-06-24 23:12:41', 'david.wilson@example.com', 2),
 (102, '2024-06-26 04:04:34', 'jane.smith@example.com', 2),
-(103, '2024-06-26 04:04:35', 'jane.smith@example.com', 4);
+(103, '2024-06-26 04:04:35', 'jane.smith@example.com', 4),
+(107, '2024-06-28 13:40:32', 'datlo2208@gmail.com ', 1),
+(109, '2024-06-28 14:59:58', 'david.wilson@example.com', 2),
+(110, '2024-06-28 14:59:58', 'david.wilson@example.com', 1),
+(111, '2024-06-28 16:19:59', 'datlowashere@gmail.com ', 2);
 
 -- --------------------------------------------------------
 
@@ -408,9 +429,38 @@ INSERT INTO `notification` (`notification_id`, `title`, `message`, `create_at`, 
 (140, 'Order Delivering', 'Order: ORD240626034514. Your order is on its way to you.', '2024-06-26 03:57:59', 1, 'david.wilson@example.com', 'ORD240626034514'),
 (141, 'Order Receiveds', 'Order: ORD240626034514: has been completed', '2024-06-26 03:58:16', 1, 'david.wilson@example.com', 'ORD240626034514'),
 (143, 'Payment Failed', 'Order: ORD240626040444: not pay yet', '2024-06-26 04:05:19', 0, 'jane.smith@example.com', 'ORD240626040444'),
-(144, 'Order Created', 'Order: ORD240626152307: 21.250 ₫ has been created', '2024-06-26 15:23:18', 0, 'david.wilson@example.com', 'ORD240626152307'),
-(145, 'Payment Succesful', 'Order: ORD240626152307: has been paid successfully', '2024-06-26 15:23:33', 0, 'david.wilson@example.com', 'ORD240626152307'),
-(146, 'Order Cancelled', 'Order: ORD240626152307: has been cancelled for reason: Price Too High', '2024-06-26 15:23:46', 0, 'david.wilson@example.com', 'ORD240626152307');
+(144, 'Order Created', 'Order: ORD240626152307: 21.250 ₫ has been created', '2024-06-26 15:23:18', 1, 'david.wilson@example.com', 'ORD240626152307'),
+(146, 'Order Cancelled', 'Order: ORD240626152307: has been cancelled for reason: Price Too High', '2024-06-26 15:23:46', 1, 'david.wilson@example.com', 'ORD240626152307'),
+(147, 'Order Created', 'Order: ORD240627163232: 149.600 ₫ has been created', '2024-06-27 16:33:13', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(148, 'Payment Succesful', 'Order: ORD240627163232: has been paid successfully', '2024-06-27 16:33:29', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(149, 'Order Preparing', 'Order: ORD240627163232. Your order is being prepared.', '2024-06-27 16:33:59', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(150, 'Order Pick Up', 'Order: ORD240627163232. Shipper has picked up your order.', '2024-06-27 16:34:06', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(151, 'Order Delivering', 'Order: ORD240627163232. Your order is on its way to you.', '2024-06-27 16:34:13', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(152, 'Order Receiveds', 'Order: ORD240627163232: has been completed', '2024-06-27 16:34:22', 1, 'david.wilson@example.com', 'ORD240627163232'),
+(153, 'Order Created', 'Order: ORD240627163457: 60.000 ₫ has been created', '2024-06-27 16:35:02', 1, 'david.wilson@example.com', 'ORD240627163457'),
+(154, 'Payment Failed', 'Order: ORD240627163457: not pay yet', '2024-06-27 16:35:09', 1, 'david.wilson@example.com', 'ORD240627163457'),
+(155, 'Payment Succesful', 'Order: ORD240627163457: has been paid successfully', '2024-06-27 16:35:30', 1, 'david.wilson@example.com', 'ORD240627163457'),
+(156, 'Order Created', 'Order: ORD240627215136: 63.750 ₫ has been created', '2024-06-27 21:52:28', 1, 'datlo2208@gmail.com ', 'ORD240627215136'),
+(157, 'Payment Succesful', 'Order: ORD240627215136: has been paid successfully', '2024-06-27 21:52:44', 1, 'datlo2208@gmail.com ', 'ORD240627215136'),
+(158, 'Order Cancelled', 'Order: ORD240627215136: has been cancelled for reason: Wrong Order Details', '2024-06-27 21:53:10', 0, 'datlo2208@gmail.com ', 'ORD240627215136'),
+(159, 'Order Created', 'Order: ORD240628133902: 85.000 ₫ has been created', '2024-06-28 13:39:22', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(160, 'Payment Succesful', 'Order: ORD240628133902: has been paid successfully', '2024-06-28 13:39:37', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(161, 'Order Preparing', 'Order: ORD240628133902. Your order is being prepared.', '2024-06-28 13:40:04', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(162, 'Order Pick Up', 'Order: ORD240628133902. Shipper has picked up your order.', '2024-06-28 13:40:05', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(163, 'Order Delivering', 'Order: ORD240628133902. Your order is on its way to you.', '2024-06-28 13:40:07', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(164, 'Order Receiveds', 'Order: ORD240628133902: has been completed', '2024-06-28 13:40:14', 0, 'datlo2208@gmail.com ', 'ORD240628133902'),
+(165, 'Order Created', 'Order: ORD240628134501: 29.750 ₫ has been created', '2024-06-28 13:45:10', 1, 'david.wilson@example.com', 'ORD240628134501'),
+(166, 'Payment Succesful', 'Order: ORD240628134501: has been paid successfully', '2024-06-28 13:45:24', 1, 'david.wilson@example.com', 'ORD240628134501'),
+(167, 'Order Cancelled', 'Order: ORD240628134501: has been cancelled for reason: Wrong Order Details', '2024-06-28 13:45:35', 1, 'david.wilson@example.com', 'ORD240628134501'),
+(168, 'Order Pick Up', 'Order: ORD240627163457. Shipper has picked up your order.', '2024-06-28 16:12:08', 0, 'david.wilson@example.com', 'ORD240627163457'),
+(169, 'Order Delivering', 'Order: ORD240627163457. Your order is on its way to you.', '2024-06-28 16:12:25', 0, 'david.wilson@example.com', 'ORD240627163457'),
+(170, 'Order Created', 'Order: ORD240628162038: 446.250 ₫ has been created', '2024-06-28 16:21:39', 1, 'datlowashere@gmail.com ', 'ORD240628162038'),
+(171, 'Payment Succesful', 'Order: ORD240628162038: has been paid successfully', '2024-06-28 16:21:57', 1, 'datlowashere@gmail.com ', 'ORD240628162038'),
+(172, 'Order Created', 'Order: ORD240628162222: 21.250 ₫ has been created', '2024-06-28 16:22:29', 1, 'datlowashere@gmail.com ', 'ORD240628162222'),
+(173, 'Payment Failed', 'Order: ORD240628162222: not pay yet', '2024-06-28 16:22:38', 1, 'datlowashere@gmail.com ', 'ORD240628162222'),
+(174, 'Order Cancelled', 'Order: ORD240628162222: has been cancelled for reason: Delay in Delivery', '2024-06-28 16:22:56', 1, 'datlowashere@gmail.com ', 'ORD240628162222'),
+(175, 'Order Preparing', 'Order: ORD240628162038. Your order is being prepared.', '2024-06-28 16:23:18', 1, 'datlowashere@gmail.com ', 'ORD240628162038'),
+(176, 'Order Pick Up', 'Order: ORD240628162038. Shipper has picked up your order.', '2024-06-28 16:23:27', 1, 'datlowashere@gmail.com ', 'ORD240628162038');
 
 -- --------------------------------------------------------
 
@@ -514,7 +564,14 @@ INSERT INTO `order` (`order_id`, `order_date`, `create_at`, `update_at`, `paymen
 ('ORD240626033200', '2024-06-26 03:32:18', '2024-06-26 03:32:18', '2024-06-26 03:33:09', 'Zalo Pay', 126650, 22350, 'delivered', 7, 2, 'Call me when u arrive '),
 ('ORD240626034514', '2024-06-26 03:45:32', '2024-06-26 03:45:32', '2024-06-26 03:58:16', 'Zalo Pay', 63750, 11250, 'delivered', 14, 2, 'Call me when you arrive '),
 ('ORD240626040444', '2024-06-26 04:05:16', '2024-06-26 04:05:16', '2024-06-26 04:05:16', 'Zalo Pay', 128350, 22650, 'pending', 11, 2, ''),
-('ORD240626152307', '2024-06-26 15:23:18', '2024-06-26 15:23:18', '2024-06-26 15:23:46', 'Zalo Pay', 21250, 3750, 'cancelled', 7, 2, 'Ok');
+('ORD240626152307', '2024-06-26 15:23:18', '2024-06-26 15:23:18', '2024-06-26 15:23:46', 'Zalo Pay', 21250, 3750, 'cancelled', 7, 2, 'Ok'),
+('ORD240627163232', '2024-06-27 16:33:13', '2024-06-27 16:33:13', '2024-06-27 16:34:22', 'Zalo Pay', 149600, 26400, 'delivered', 8, 2, ''),
+('ORD240627163457', '2024-06-27 16:35:02', '2024-06-27 16:35:02', '2024-06-28 16:12:25', 'Zalo Pay', 60000, 15000, 'delivering', 7, 3, ''),
+('ORD240627215136', '2024-06-27 21:52:28', '2024-06-27 21:52:28', '2024-06-27 21:53:10', 'Zalo Pay', 63750, 11250, 'cancelled', 15, 2, 'Call me before arrive '),
+('ORD240628133902', '2024-06-28 13:39:22', '2024-06-28 13:39:22', '2024-06-28 13:40:14', 'Zalo Pay', 85000, 15000, 'delivered', 16, 2, 'Call me when u arrive'),
+('ORD240628134501', '2024-06-28 13:45:10', '2024-06-28 13:45:10', '2024-06-28 13:45:35', 'Zalo Pay', 29750, 5250, 'cancelled', 8, 2, 'Okela'),
+('ORD240628162038', '2024-06-28 16:21:39', '2024-06-28 16:21:39', '2024-06-28 16:23:45', 'Zalo Pay', 446250, 78750, 'delivered', 17, 2, 'Ok'),
+('ORD240628162222', '2024-06-28 16:22:29', '2024-06-28 16:22:29', '2024-06-28 16:22:56', 'Zalo Pay', 21250, 3750, 'cancelled', 17, 2, 'ok');
 
 -- --------------------------------------------------------
 
@@ -607,7 +664,14 @@ INSERT INTO `payment_detail` (`payment_id`, `status`, `create_at`, `order_id`) V
 (79, 'paid', '2024-06-26 03:32:36', 'ORD240626033200'),
 (80, 'paid', '2024-06-26 03:57:07', 'ORD240626034514'),
 (81, 'unpaid', '2024-06-26 04:05:19', 'ORD240626040444'),
-(82, 'paid', '2024-06-26 15:23:33', 'ORD240626152307');
+(82, 'paid', '2024-06-26 15:23:33', 'ORD240626152307'),
+(83, 'paid', '2024-06-27 16:33:29', 'ORD240627163232'),
+(84, 'paid', '2024-06-27 16:35:09', 'ORD240627163457'),
+(85, 'paid', '2024-06-27 21:52:44', 'ORD240627215136'),
+(86, 'paid', '2024-06-28 13:39:37', 'ORD240628133902'),
+(87, 'paid', '2024-06-28 13:45:25', 'ORD240628134501'),
+(88, 'paid', '2024-06-28 16:21:57', 'ORD240628162038'),
+(89, 'unpaid', '2024-06-28 16:22:39', 'ORD240628162222');
 
 -- --------------------------------------------------------
 
@@ -638,12 +702,12 @@ INSERT INTO `product` (`product_id`, `name`, `img`, `description`, `price`, `cat
 (6, 'Flat White', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689853/rcoffee/product/ownmssncwf7sltpx1jvb.jpg', 'Smooth and velvety coffee.', 25000, 2, 'available'),
 (7, 'Americano', 'https://as1.ftcdn.net/v2/jpg/06/27/72/08/1000_F_627720871_kZ9KfTT179IjjT7FNqBC9vaLS2n5tLAw.jpg', 'Simple and classic black coffee.', 30000, 4, 'is available'),
 (8, 'Extrempa', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689841/rcoffee/product/vu3obf8t33fgylmyek9r.jpg', 'Chocolate-flavored coffee and rich cheese with little sugar', 24000, 1, 'available'),
-(9, 'Caramel Mocha', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689830/rcoffee/product/vxb1nubxseias6vqtcbx.jpg', 'Mocha with caramel.', 35000, 5, 'available'),
+(9, 'Caramel Mocha', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689830/rcoffee/product/vxb1nubxseias6vqtcbx.jpg', 'Mocha with caramel.', 55000, 5, 'available'),
 (10, 'Cold Brew', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689818/rcoffee/product/iyekjuqwuenju5jg0tjw.jpg', 'Smooth cold coffee.', 25000, 4, 'available'),
 (11, 'BeeCapuchio', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689805/rcoffee/product/hxadbevm0qfgljsjyytd.jpg', 'Hot and cold', 25000, 4, 'available'),
 (12, 'EmmaAmericano', 'https://res.cloudinary.com/datlowashere/image/upload/v1716887291/rcoffee/product/paed6ooqx4bsc07nwe6u.jpg', 'Hot and reach', 26000, 4, 'is available'),
 (13, 'Mochiano', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689793/rcoffee/product/lfx4nysuqiezjcgwjsvv.jpg', 'Highly and hot', 35000, 5, 'available'),
-(14, 'Americano Original', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689781/rcoffee/product/tmvklv0rlovbl7z6ilbr.jpg', 'Coffee is a beverage brewed from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content. It has the highest sales in the world market for hot drinks.', 27000, 4, 'available'),
+(14, 'Americano Original', 'https://res.cloudinary.com/datlowashere/image/upload/v1717689781/rcoffee/product/tmvklv0rlovbl7z6ilbr.jpg', 'Coffee is a beverage brewed from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content. It has the highest sales in the world market for hot drinks.', 17000, 4, 'available'),
 (15, 'XunaX', 'https://res.cloudinary.com/datlowashere/image/upload/v1717612610/rcoffee/product/igzldolcu8jfgxd2o68q.jpg', 'Special edition of americano', 35000, 3, 'is available'),
 (16, 'Americano Blackx5', 'https://res.cloudinary.com/datlowashere/image/upload/v1717168532/rcoffee/product/fxcxwsiofpgu6okcoeqs.jpg', 'Hot and extremely bitter', 45000, 4, 'is available');
 
@@ -696,7 +760,9 @@ INSERT INTO `rating` (`rating_id`, `rating`, `review`, `product_id`, `email_user
 (35, 3, 'It norm', 10, 'david.wilson@example.com', '2024-06-26 03:37:41', 172),
 (36, 2, 'Not good as i expected ', 10, 'david.wilson@example.com', '2024-06-26 03:58:41', 175),
 (37, 5, 'Love this flavor ', 6, 'david.wilson@example.com', '2024-06-26 03:58:50', 176),
-(38, 4, 'Pretty simple but not too bad', 2, 'david.wilson@example.com', '2024-06-26 03:59:45', 174);
+(38, 4, 'Pretty simple but not too bad', 2, 'david.wilson@example.com', '2024-06-26 03:59:45', 174),
+(39, 5, 'Oke', 1, 'david.wilson@example.com', '2024-06-27 16:36:27', 169),
+(40, 4, 'Good', 1, 'datlowashere@gmail.com ', '2024-06-28 16:23:59', 189);
 
 -- --------------------------------------------------------
 
@@ -719,9 +785,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`email_user`, `password`, `gender`, `phone`, `user_img`, `name`, `token`) VALUES
-('david.wilson@example.com', '123', 'male', '9988776655', 'https://res.cloudinary.com/datlowashere/image/upload/v1716614542/rcoffee/employee/jsmoggcpoqbryoy1n3ii.png', 'David Wilson', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
+('datlo2208@gmail.com ', '123456', 'Male', '0972527169', 'https://firebasestorage.googleapis.com/v0/b/r-coffee-ee438.appspot.com/o/images%2Fdatlo2208%40gmail.com%20%2F4ef61503-fe00-40c1-ae67-ff2dfa7bf9cb?alt=media&token=9865fbba-7808-46d4-b2da-3256365ad089', 'Xích Hồ Thư Sinh', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
+('datlowashere@gmail.com ', '123456', 'Male', '097637252', 'https://firebasestorage.googleapis.com/v0/b/r-coffee-ee438.appspot.com/o/images%2Fdatlowashere%40gmail.com%20%2F4cbfe91f-c6eb-4c21-a1bf-05c477c0fe4e?alt=media&token=5ef80c3a-e8a7-4c7d-b2aa-e79ca6911bc1', 'Đạt', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
+('david.wilson@example.com', 'abcxyz', 'Male', '0876362816', 'https://firebasestorage.googleapis.com/v0/b/r-coffee-ee438.appspot.com/o/images%2Fdavid.wilson%40example.com%2F783c818e-da39-442d-bf28-18431d0de966?alt=media&token=e7820b80-4d25-4748-9a72-3e8c49fcc580', 'Công Đức Vô Lượng', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
 ('emily.davis@example.com', 'password123', 'female', '6677889900', 'https://baoxaydung.com.vn/stores/news_dataimages/vananh/022020/06/11/in_article/0813_image001.jpg', 'Emily Davis', NULL),
-('jane.smith@example.com', '1123', 'female', '0987654321', 'https://images2.thanhnien.vn/Uploaded/ttt/images/Content/chan-dung/sao-quoc-te/2016_01_w1/Dong_Dai_Vy/b0cf68dab563cb87dc647de0de335d24.jpg', 'Jane Smith', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
+('jane.smith@example.com', '1123', 'Female', '0976204141', 'https://firebasestorage.googleapis.com/v0/b/r-coffee-ee438.appspot.com/o/images%2Fjane.smith%40example.com%2F97b96274-1016-415b-9f5d-77ba66e038d8?alt=media&token=99489b39-7b0f-4efb-a644-67cbf7bbee51', 'Mini', 'eK2RL5UeSAqlZ8KcSzt42t:APA91bG5V4be7pnSyn51A-YFp9CXDRnd5pq_I9suC-9gqCmvFvBmextIxGyf6pF5qIHNClFM75RhjVaEIz9UopV5sBDFRfZmA1GOOX1SimAIdJJzqOxB5d58Bc9UiyYa1XUK8nHqqRul'),
 ('john.doe@example.com', '123', 'male', '1234567890', 'https://res.cloudinary.com/datlowashere/image/upload/v1716614542/rcoffee/employee/jsmoggcpoqbryoy1n3ii.png', 'Jonh Doe', NULL),
 ('michael.brown@example.com', '123', 'male', '1122334455', 'https://example.com/images/michael_brown.jpg', 'Michael Brown', NULL);
 
@@ -744,37 +812,8 @@ CREATE TABLE `verification_codes` (
 --
 
 INSERT INTO `verification_codes` (`id`, `email_user`, `code`, `expiration`, `created_at`) VALUES
-(1, 'datlowashere@gmail.com ', '3211EB', 1719439532669, '2024-06-26 22:00:32'),
-(2, 'datlowashere@gmail.com ', '8FB4FB', 1719439586618, '2024-06-26 22:01:26'),
-(3, 'datltpd05558@fpt.edu.vn', '0F269E', 1719439655030, '2024-06-26 22:02:35'),
-(4, 'datlowashere@gmail.com', 'B5880C', 1719439750569, '2024-06-26 22:04:10'),
-(5, 'datlowashere@gmail.com ', 'C55D73', 1719448063339, '2024-06-27 00:22:43'),
-(6, 'datlowashere@gmail.com ', '9CCA2B', 1719448178563, '2024-06-27 00:24:38'),
-(7, 'datlowashere@gmail.com ', '29313A', 1719448905809, '2024-06-27 00:36:45'),
-(8, 'datlowashere@gmail.com ', 'A15FF1', 1719449025491, '2024-06-27 00:38:45'),
-(9, 'datlowashere@gmail.com ', '1E6C45', 1719449075750, '2024-06-27 00:39:35'),
-(10, 'datlowashere@gmail.com ', 'C371C3', 1719449326522, '2024-06-27 00:43:46'),
-(11, 'datlo2208@gmail.com ', '749626', 1719449527842, '2024-06-27 00:47:07'),
-(12, 'datlo2208@gmail.com ', '222591', 1719450411649, '2024-06-27 01:01:51'),
-(13, 'jane.smith@example.com', '342188', 1719450516169, '2024-06-27 01:03:36'),
-(14, 'jane.smith@example.com', '147876', 1719450564657, '2024-06-27 01:04:24'),
-(15, 'jane.smith@example.com', '286862', 1719450596273, '2024-06-27 01:04:56'),
-(16, 'jane.smith@example.com', '604977', 1719450616634, '2024-06-27 01:05:16'),
-(17, 'jane.smith@example.com', '256353', 1719450789426, '2024-06-27 01:08:09'),
-(18, 'jane.smith@example.com', '517801', 1719450831373, '2024-06-27 01:08:51'),
-(19, 'jane.smith@example.com', '479215', 1719451005203, '2024-06-27 01:11:45'),
-(20, 'jane.smith@example.com', '996201', 1719451033818, '2024-06-27 01:12:13'),
-(21, 'datlowashere@gmail.com ', '694983', 1719451080241, '2024-06-27 01:13:00'),
-(22, 'datlowashere@gmail.com ', '715110', 1719451219903, '2024-06-27 01:15:19'),
-(23, 'david.wilson@example.com ', '766181', 1719451228358, '2024-06-27 01:15:28'),
-(24, 'datlowashere@gmail.com ', '989400', 1719474212697, '2024-06-27 07:38:32'),
-(25, 'datlowashere@gmail.com ', '944240', 1719474242041, '2024-06-27 07:39:02'),
-(26, 'david.wilson@example.co', '800764', 1719475015764, '2024-06-27 07:51:55'),
-(27, 'datlowashere@gmail.com', '437587', 1719475200957, '2024-06-27 07:55:00'),
-(28, 'datlowashere@gmail.com', '465464', 1719475471399, '2024-06-27 07:59:31'),
-(29, 'datlowashere@gmail.com', '845169', 1719476185412, '2024-06-27 08:14:25'),
-(30, 'datlowashere@gmail.com', '618633', 1719476427686, '2024-06-27 08:18:27'),
-(31, 'datlowashere@gmail.com', '155535', 1719476584498, '2024-06-27 08:21:04');
+(45, 'datlt1204@gmail.com', '853294', 1719503303572, '2024-06-27 15:46:23'),
+(58, 'ngoctlg02@gmail.com', '184159', 1719568722804, '2024-06-28 09:56:42');
 
 -- --------------------------------------------------------
 
@@ -800,17 +839,19 @@ INSERT INTO `voucher` (`voucher_id`, `voucher_code`, `percent`, `valid_date`, `e
 (2, 'SUMMER15', 15, '2024-06-01 10:00:00', '2024-08-31 02:00:00', 1),
 (3, 'FALL20', 20, '2024-09-01 00:00:00', '2024-11-30 00:00:00', 1),
 (4, 'WINTER25', 25, '2024-12-01 00:00:00', '2025-02-28 00:00:00', 1),
-(5, 'SPRING30', 30, '2024-03-01 00:00:00', '2024-05-31 00:00:00', 1),
-(6, 'TCT3', 65, '2024-05-29 10:47:00', '2024-06-01 00:47:00', 1),
-(7, 'RX004', 15, '2024-05-30 10:48:00', '2024-06-15 12:50:00', 1),
-(8, 'PXL4', 22, '2024-05-30 06:21:00', '2024-06-08 05:17:00', 1),
+(5, 'SPRING30', 30, '2024-03-01 00:00:00', '2024-05-31 00:00:00', 0),
+(6, 'TCT3', 65, '2024-05-29 10:47:00', '2024-06-01 00:47:00', 0),
+(7, 'RX004', 15, '2024-05-30 10:48:00', '2024-06-15 12:50:00', 0),
+(8, 'PXL4', 22, '2024-05-30 06:21:00', '2024-06-08 05:17:00', 0),
 (9, 'NTN34', 12, '2024-05-29 13:42:00', '2024-05-31 01:42:00', 0),
 (10, 'NT732434', 23, '2024-06-08 13:39:00', '2024-06-08 13:45:00', 0),
-(11, 'AFTERNOON12', 50, '2024-06-02 06:06:00', '2024-06-09 02:03:00', 1),
+(11, 'AFTERNOON12', 50, '2024-06-02 06:06:00', '2024-06-09 02:03:00', 0),
 (12, 'MORNIGN12', 25, '2024-05-29 02:09:00', '2024-05-29 18:00:00', 0),
-(29, 'TCL357', 50, '2024-06-08 20:58:00', '2024-06-13 10:58:00', 1),
-(30, 'TCL355', 15, '2024-06-03 21:02:00', '2024-06-08 21:02:00', 1),
-(31, 'TCT3', 35, '2024-06-02 21:47:00', '2024-06-18 21:48:00', 1);
+(29, 'TCL357', 50, '2024-06-08 20:58:00', '2024-06-13 10:58:00', 0),
+(30, 'TCL355', 15, '2024-06-03 21:02:00', '2024-06-08 21:02:00', 0),
+(31, 'TCT3', 35, '2024-06-02 21:47:00', '2024-06-18 21:48:00', 0),
+(33, 'VXC2031', 4, '2024-06-29 15:08:00', '2024-07-04 15:08:00', 1),
+(34, 'SUBCODE13', 6, '2024-06-29 18:07:00', '2024-07-06 21:13:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -930,7 +971,7 @@ ALTER TABLE `voucher`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `banner`
@@ -942,37 +983,37 @@ ALTER TABLE `banner`
 -- AUTO_INCREMENT for table `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `basket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `cancel`
 --
 ALTER TABLE `cancel`
-  MODIFY `cancel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `cancel_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `favorite`
 --
 ALTER TABLE `favorite`
-  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
 
 --
 -- AUTO_INCREMENT for table `payment_detail`
 --
 ALTER TABLE `payment_detail`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -984,19 +1025,19 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `rating`
 --
 ALTER TABLE `rating`
-  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `verification_codes`
 --
 ALTER TABLE `verification_codes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `voucher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
