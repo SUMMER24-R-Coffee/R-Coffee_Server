@@ -58,8 +58,8 @@ class UserController {
                 return res.status(400).json({ status: "error", message: 'Invalid or expired verification code.' });
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const insertValues = [email_user, hashedPassword];
+            // const hashedPassword = await bcrypt.hash(password, 10);
+            const insertValues = [email_user, password];
 
             await User.insertUser(insertValues);
             await VerificationCode.deleteCode(email_user);
@@ -73,22 +73,34 @@ class UserController {
 
     async login(req, res) {
         const { email_user, password } = req.body;
-        console.log("Login Request 🌶️", email_user);
-
+    
+        console.log("Login Request 🌶️ email_user:", email_user);
+        console.log("Login Request 🌶️ password:", password);
+    
+        if (!email_user || !password) {
+            return res.status(400).json({
+                status: "error",
+                message: "Email and password are required",
+            });
+        }
+    
         try {
             const result = await User.getUser(email_user);
-
+            console.log("Result from User.getUser:", result);
+    
             if (result.length === 0) {
-                return res.status(404).json({
+                return res.send({
                     status: "error",
                     message: "User does not exist",
                 });
             }
-
-            // const hashedPassword = result[0].password;
+    
+            const hashedPassword = result[0].password;
+            console.log("Stored hashed password:", hashedPassword);
+    
             // const isPasswordValid = await bcrypt.compare(password, hashedPassword);
-
-            if (password) {
+    
+            if (password === hashedPassword) {
                 return res.json({
                     status: "success",
                     message: "Login successful",
@@ -101,14 +113,20 @@ class UserController {
                     },
                 });
             } else {
-                return res.status(401).json({ status: "error", message: "Password is incorrect" });
+                return res.send({
+                    status: "error",
+                    message: "Password is incorrect",
+                });
             }
         } catch (error) {
             console.error("Error during login 🌶️", error);
-            return res.status(500).json({ status: "error", message: "Internal Server Error: " + error.message });
+            return res.status(500).json({
+                status: "error",
+                message: "Internal Server Error: " + error.message,
+            });
         }
     }
-
+    
     async getUser(req, res) {
         const { email_user } = req.params;
 

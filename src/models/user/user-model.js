@@ -22,17 +22,20 @@ const updateTokenUser = async (token, email_user) => {
 };
 
 const updateUser = async (values) => {
-    let query = `UPDATE users SET name = ?, gender = ?, phone = ? `;
-    const queryParams = [values.name, values.gender, values.phone, values.email_user];
+    let query;
+    let queryParams;
 
     if (values.user_img) {
-        query = `UPDATE users SET user_img = ?, name = ?, gender = ?, phone = ? `;
-        queryParams.splice(1, 0, values.user_img);
+        query = `UPDATE users SET user_img = ?, name = ?, gender = ?, phone = ? WHERE email_user = ?`;
+        queryParams = [values.user_img, values.name, values.gender, values.phone, values.email_user];
+    } else {
+        query = `UPDATE users SET name = ?, gender = ?, phone = ? WHERE email_user = ?`;
+        queryParams = [values.name, values.gender, values.phone, values.email_user];
     }
 
-    query += 'WHERE email_user = ?';
     return await connection.queryDatabase(query, queryParams);
 };
+
 
 const updatePassword = async (values) => {
     const query = 'UPDATE USERS SET password= ? WHERE email_user = ?';
