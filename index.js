@@ -1,25 +1,26 @@
-const express =require('express')
-const handlebars = require('express-handlebars')
-const path = require('path')
-const morgan = require('morgan')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-const flash = require('express-flash')
-const session = require('express-session')
+const express = require('express');
+const handlebars = require('express-handlebars');
+const path = require('path');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const flash = require('express-flash');
+const session = require('express-session');
 
-const app=express()
-const port=3000;
+const app = express();
+const port = 3000;
+const host = '192.168.1.9'; // Add the host here
 
-const route =require('./src/routers/index')
+const route = require('./src/routers/index');
 
-app.use(methodOverride('_method'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(methodOverride('_method'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname,'src')))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(morgan("combined"))
+app.use(morgan("combined"));
 
 app.use(
     session({
@@ -27,20 +28,20 @@ app.use(
         resave: true,
         saveUninitialized: true,
     })
-)
-app.use(flash())
+);
+app.use(flash());
 app.engine('hbs', handlebars.engine({
     defaultLayout: false,
-    extname:'.hbs',
-    layoutsDir:__dirname +'\\src\\views\\',
-    partialsDir: __dirname +'\\src\\views\\partials',
-    runtimeOptions:{
-        allowProtoPropertiesByDefault:true,
-        allowProtoMethodsByDefault:true,
+    extname: '.hbs',
+    layoutsDir: __dirname + '\\src\\views\\',
+    partialsDir: __dirname + '\\src\\views\\partials',
+    runtimeOptions: {
+        allowProtoPropertiesByDefault: true,
+        allowProtoMethodsByDefault: true,
     },
-    helpers:{
-        sum: (a, b) => a+b,
-        eq: (a, b) => a === b, 
+    helpers: {
+        sum: (a, b) => a + b,
+        eq: (a, b) => a === b,
         ifCond: (v1, operator, v2, options) => {
             switch (operator) {
                 case '==':
@@ -51,28 +52,27 @@ app.engine('hbs', handlebars.engine({
                     return options.inverse(this);
             }
         },
-        json:  (context) => JSON.stringify(context),
+        json: (context) => JSON.stringify(context),
         or: function () {
             const args = Array.prototype.slice.call(arguments, 0, -1);
             return args.some(Boolean);
-        }, 
-        gt: (a, b) => a > b,   
+        },
+        gt: (a, b) => a > b,
         formatCurrency: (number, currencyCode) => {
             const formatter = new Intl.NumberFormat("vi-VN", {
-              style: "currency",
-              currency: currencyCode,
+                style: "currency",
+                currency: currencyCode,
             });
             return formatter.format(number);
-        },                                  
-             
+        },
     }
-}))
+}));
 
-app.set('view engine', 'hbs')
-app.set('views',__dirname+ '\\src\\views\\')
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '\\src\\views\\');
 
-route(app)
+route(app);
 
-app.listen(port, ()=>{
-    console.log(`Server is running on port ${port}`)
-})
+app.listen(port, host, () => {
+    console.log(`Server is running on http://${host}:${port}/`);
+});
