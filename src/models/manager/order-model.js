@@ -7,12 +7,13 @@ const getOrders = async ()=>{
 }
 
 const getOder = async (order_id) =>{
-    const query = `SELECT DISTINCT o.*, b.*, a.location, v.voucher_code, u.phone, u.name, u.email_user,u.token, SUM(b.quantity) AS total_quantity 
+    const query = `SELECT DISTINCT o.*, b.*, a.location, v.voucher_code, u.phone, u.name, u.email_user,u.token, SUM(b.quantity) AS total_quantity, pt.status AS payment_status
     FROM \`order\` o 
     JOIN basket b ON o.order_id = b.order_id 
     JOIN address a ON a.address_id = o.address_id 
     LEFT JOIN voucher v ON v.voucher_id = o.voucher_id 
     JOIN users u ON u.email_user = a.email_user 
+    JOIN payment_detail pt ON o.order_id = pt.order_id
     WHERE o.order_id = ?
     AND (v.voucher_id IS NOT NULL OR v.voucher_id IS NULL)
     GROUP BY o.order_id`;

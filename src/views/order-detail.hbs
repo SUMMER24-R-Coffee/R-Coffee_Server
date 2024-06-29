@@ -55,7 +55,10 @@
                         <div class="card">
                             <div class="card-body">
                                {{#each order}}
-                                <h4 class="card-title">Order ID: {{order_id}}</h4>
+                               <div class="d-flex justify-content-between">
+                                 <h4 class="card-title">Order ID: {{order_id}}</h4>
+                                 <h4 class="card-title">Payment status:    {{#if (eq payment_status 'paid')}}<i style="color: green;">{{payment_status}}</i>{{else}}<i style="color: red;">{{payment_status}}</i>{{/if}}</h4>                                
+                               </div>
                                 <p>{{order_date}}</p>
                                 <h6>{{name}} | {{phone}} | {{location}}</h6>
                                 <input type="hidden" name="email_user" value="{{email_user}}" data-order-id="{{order_id}}">
