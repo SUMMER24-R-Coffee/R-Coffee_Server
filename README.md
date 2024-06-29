@@ -1,8 +1,8 @@
-# R-Coffee Server
+# R'Coffee Server
 
 ## About
 
-R-Coffee Server is the backend component of the R-Coffee application, designed following the MVC (Model-View-Controller) architecture. This project is developed using Node.js, Express.js and Bootstrap 4 custom from [Breeze-Free-Bootstrap-Admin-Template](https://github.com/BootstrapDash/Breeze-Free-Bootstrap-Admin-Template) , providing APIs for the app and CRUD operations for management and authentication. Read more about [Frontend](https://github.com/SUMMER24-R-Coffee/R-Coffee_App)
+R'Coffee Server is the backend component of the R-Coffee application, designed following the MVC (Model-View-Controller) architecture. This project is developed using Node.js, Express.js and Bootstrap 4 custom from [Breeze-Free-Bootstrap-Admin-Template](https://github.com/BootstrapDash/Breeze-Free-Bootstrap-Admin-Template) , providing APIs for the app and CRUD operations for management and authentication. Read more about [Frontend](https://github.com/SUMMER24-R-Coffee/R-Coffee_App)
 
 ## Features
 
