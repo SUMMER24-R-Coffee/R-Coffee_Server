@@ -66,7 +66,7 @@ R'Coffee Server is the backend component of the R-Coffee application, designed f
 |![Baner](./public/assets/images/readme/baner.png)<h4 align="center">Baner</h4> |
 |![voucher](./public/assets/images/readme/voucher.png)<h4 align="center">Voucher</h4> |
 |![Emp](./public/assets/images/readme/emp1.png)<h4 align="center">Employee</h4> |
-|![Add](./public/assets/images/readme/adv.png)<h4 align="center">Modal Add</h4> |
+|![Add](./public/assets/images/readme/addv.png)<h4 align="center">Modal Add</h4> |
 |![Edit](./public/assets/images/readme/edv.png)<h4 align="center">Modal Edit</h4> |
 |![Delete](./public/assets/images/readme/del.png)<h4 align="center">Modal Delete</h4> |
 
