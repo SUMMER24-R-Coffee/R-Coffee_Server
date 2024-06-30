@@ -5,7 +5,6 @@ const NotificationModel = require("../../models/user/notification-model");
 const sendNotification = require("../../utils/sendNotification");
 const { formatCurrency } = require("../../utils/formatCurrency"); 
 require('dotenv').config();
-
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
 
 class OrderController {
