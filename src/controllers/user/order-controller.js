@@ -4,6 +4,7 @@ const CancelModel =require('../../models/user/cancel-model')
 const NotificationModel = require("../../models/user/notification-model");
 const sendNotification = require("../../utils/sendNotification");
 const { formatCurrency } = require("../../utils/formatCurrency"); 
+const stripe = require('stripe')('sk_test_51PXGt92MK7lgPTnSxHiernvtEp9bda0ToMDx0jITHwzKJdSr5HAGRmb5vUaAPhUKUERS51VD692kD7QioGXG6jDM00ZNbsnjFS'); 
 
 class OrderController {
     // [POST]
@@ -126,7 +127,24 @@ class OrderController {
 
     }
 
-        
+    async createPaymentIntent(req, res) {
+        const { total_amount, currency } = req.body;
+        console.log("STRIPE 😬😬😬😬😬 ", currency + total_amount)
+
+        try {
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: Math.round(2 * 100),
+                currency: currency,
+            });
+    
+            res.send({
+                clientSecret: paymentIntent.client_secret,
+            });
+        } catch (error) {
+            console.error("Error creating PaymentIntent:", error);
+            res.status(500).send({ status: "error", message: "Failed to create PaymentIntent" });
+        }
+    }        
     
 }
 

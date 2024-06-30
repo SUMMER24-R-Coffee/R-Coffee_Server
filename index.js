@@ -73,6 +73,6 @@ app.set('views', __dirname + '\\src\\views\\');
 
 route(app);
 
-app.listen(port, host, () => {
+app.listen(port, () => {
     console.log(`Server is running on http://${host}:${port}/`);
 });
