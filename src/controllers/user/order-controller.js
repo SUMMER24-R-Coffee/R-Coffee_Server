@@ -130,10 +130,14 @@ class OrderController {
     async createPaymentIntent(req, res) {
         const { total_amount, currency } = req.body;
         console.log("STRIPE 😬😬😬😬😬 ", currency + total_amount)
+        const exchangeRate = 23000;
+
 
         try {
+            const amountUsd = total_amount / exchangeRate;
+            console.log("Converted Amount in USD:", amountUsd);
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: Math.round(2 * 100),
+                amount: Math.round(amountUsd),
                 currency: currency,
             });
     
