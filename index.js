@@ -9,7 +9,7 @@ const session = require('express-session');
 
 const app = express();
 const port = 3000;
-const host = '192.168.1.9'; // Add the host here
+const host = '192.168.1.9';
 
 const route = require('./src/routers/index');
 
@@ -73,6 +73,6 @@ app.set('views', __dirname + '\\src\\views\\');
 
 route(app);
 
-app.listen(port, host, () => {
+app.listen(port, () => {
     console.log(`Server is running on http://${host}:${port}/`);
 });

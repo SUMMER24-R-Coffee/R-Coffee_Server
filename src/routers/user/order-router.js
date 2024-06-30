@@ -6,5 +6,6 @@ const orderController = require('../../controllers/user/order-controller');
 router.get('/api-app/get-orders/:email_user', orderController.getOrder);
 router.post('/api-app/insert-order', orderController.createOrder);
 router.put('/api-app/update-status-order/:order_id', orderController.updateStatusOrder)
+router.post('/api-app/create-payment-intent', orderController.createPaymentIntent);
 
 module.exports = router;

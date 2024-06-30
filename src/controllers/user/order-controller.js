@@ -4,6 +4,9 @@ const CancelModel =require('../../models/user/cancel-model')
 const NotificationModel = require("../../models/user/notification-model");
 const sendNotification = require("../../utils/sendNotification");
 const { formatCurrency } = require("../../utils/formatCurrency"); 
+require('dotenv').config();
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
 
 class OrderController {
     // [POST]
@@ -126,7 +129,28 @@ class OrderController {
 
     }
 
-        
+    async createPaymentIntent(req, res) {
+        const { total_amount, currency } = req.body;
+        console.log("STRIPE 😬😬😬😬😬 ", currency + total_amount)
+        const exchangeRate = 23000;
+
+
+        try {
+            const amountUsd = total_amount / exchangeRate;
+            console.log("Converted Amount in USD:", amountUsd);
+            const paymentIntent = await stripe.paymentIntents.create({
+                amount: Math.round(amountUsd),
+                currency: currency,
+            });
+    
+            res.send({
+                clientSecret: paymentIntent.client_secret,
+            });
+        } catch (error) {
+            console.error("Error creating PaymentIntent:", error);
+            res.status(500).send({ status: "error", message: "Failed to create PaymentIntent" });
+        }
+    }        
     
 }
 
