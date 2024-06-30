@@ -4,7 +4,9 @@ const CancelModel =require('../../models/user/cancel-model')
 const NotificationModel = require("../../models/user/notification-model");
 const sendNotification = require("../../utils/sendNotification");
 const { formatCurrency } = require("../../utils/formatCurrency"); 
-const stripe = require('stripe')('sk_test_51PXGt92MK7lgPTnSxHiernvtEp9bda0ToMDx0jITHwzKJdSr5HAGRmb5vUaAPhUKUERS51VD692kD7QioGXG6jDM00ZNbsnjFS'); 
+require('dotenv').config();
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); 
 
 class OrderController {
     // [POST]
