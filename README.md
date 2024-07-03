@@ -4,11 +4,11 @@
 
 R'Coffee Server is the backend component of the R-Coffee application, designed following the MVC (Model-View-Controller) architecture. This project is developed using Node.js, Express.js and Bootstrap 4 custom from [Breeze-Free-Bootstrap-Admin-Template](https://github.com/BootstrapDash/Breeze-Free-Bootstrap-Admin-Template) , providing APIs for the app and CRUD operations for management and authentication. Read more about [Frontend](https://github.com/SUMMER24-R-Coffee/R-Coffee_App)
 
-## Features
+<!--## Features
 
 - **Product Management**: CRUD operations for coffee products.
 - **Order Management**: Handle customer orders and transactions.
-- **Database Integration**: MySQL for data persistence.
+- **Database Integration**: MySQL for data persistence.-->
 
 ## Installation
 
@@ -41,6 +41,9 @@ R'Coffee Server is the backend component of the R-Coffee application, designed f
     # Email
     EMAIL_USER=your_email_user
     EMAIL_PASS=your_email_password
+    
+    #Stripe
+    STRIPE_SECRET_KEY = your_secret_key
     ```
 
 4. Run the server:
