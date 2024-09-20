@@ -57,7 +57,8 @@ class orderController{
             const formattedDetail = orderDetail.map(order => {
                 const totalAmount = order.total_amount;
                 const discountAmount = order.discount_amount;
-                const totalWithDiscount = totalAmount + discountAmount;                
+                const shipping_fee = order.shipping_fee;
+                const totalWithDiscount = totalAmount + discountAmount - shipping_fee;                
                 return {
                     ...order,
                     order_date: dateTimeFormat.formatDateTime(order.create_at),

@@ -139,6 +139,7 @@
                                         <p>Voucher Code</p>
                                         <p>Total Item</p>
                                         <p>Total Amount</p>
+                                        <p>Shipping Fee</p>                                        
                                         <p>Discount</p>
                                         <h6>Total Pay</h6>
                                     </div>
@@ -151,7 +152,8 @@
                                         {{/if}}
                                         <p class="text-right-align">{{total_quantity}} (items)</p>
                                         <p class="text-right-align">{{formatCurrency totalWithDiscount 'vnd'}}  đ</p>
-                                        <p class="text-right-align">{{formatCurrency discount_amount 'vnd'}} đ</p>
+                                        <p class="text-right-align">+{{formatCurrency shipping_fee 'vnd'}}  đ</p>                                        
+                                        <p class="text-right-align">-{{formatCurrency discount_amount 'vnd'}} đ</p>
                                         <h6 class="text-right-align">{{formatCurrency total_amount 'vnd'}} đ</h6>
                                     </div>
                                 </div> 
