@@ -132,6 +132,7 @@ class OrderController {
         const { total_amount, currency } = req.body;
         console.log("STRIPE 😬😬😬😬😬 ", currency + total_amount)
         const exchangeRate = 23000;
+        
 
 
         try {

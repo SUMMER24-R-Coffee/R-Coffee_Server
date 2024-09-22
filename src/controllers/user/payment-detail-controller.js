@@ -54,9 +54,9 @@ class paymentDetailController{
                 await sendNotification(token, title, message);
 
                 console.log("Payment detail","Success")
-                res.status(203).send({status:"success", message:"Success" });
+                res.status(200).send({status:"success", message:"Success" });
             }else{
-                res.status(405).send({status:"error", message:"Failed" });
+                res.status(404).send({status:"error", message:"Failed" });
                 console.log("Payment detailERRORR","ERRORR")
 
             }            
